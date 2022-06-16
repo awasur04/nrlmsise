@@ -1,0 +1,302 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using nrlmsise.Enums;
+using nrlmsise.Exceptions;
+
+namespace nrlmsise
+{
+    public partial class Form1 : Form
+    {
+        private CheckBox[] flagBoxes;
+        private TextBox[] inputParams;
+        private UIController uicontroller;
+        private Validate validate = new Validate();
+
+
+        public Form1()
+        {
+            this.uicontroller = new UIController();
+            InitializeComponent();
+            statusLabel.Text = "Initializing";
+
+            CreateUiArrays();
+            statusLabel.Text = "Ready";
+        }
+
+        #region Button Handlers
+        private void EnablallFlagButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < flagBoxes.Length; i++)
+            {
+                flagBoxes[i].Checked = true;
+            }
+            dailyApFlagTextbox.Text = "1";
+        }
+
+        private void DisableallFlagButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < flagBoxes.Length; i++)
+            {
+                flagBoxes[i].Checked = false;
+            }
+            dailyApFlagTextbox.Text = "0";
+        }
+
+        private void ResetFormButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GengraphButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ExpjsonButton_Click(object sender, EventArgs e)
+        {
+            statusLabel.Text = "Validating input";
+            if (ValidateInput())
+            {
+                statusLabel.Text = "Running simulations";
+                //Output[] testOutputs = Calculations.TestGTD7();
+                //Calculations.PrintOutput(testOutputs);
+                //statusLabel.Text = "Simulations complete";
+
+                //uicontroller.DefineInputParameters(dateTimePicker1.Value, hodTextbox.Text, altTextbox.Text, latTextbox.Text, longTextbox.Text, f107aTextbox.Text, f107Textbox.Text, apTextbox.Text, utcRadioButton.Checked);
+            
+            }
+        }
+        #endregion
+
+        #region Utilities
+        private void CreateUiArrays()
+        {
+            inputParams = new TextBox[] { hodTextbox, latTextbox, longTextbox, altTextbox, f107Textbox, f107aTextbox, apTextbox };
+
+            flagBoxes = new CheckBox[] { tn3FlagBox, nlbFlagBox, tn2FlagBox, sFlagBox, tn1FlagBox, tlbFlagBox, tinfFlagBox, turboFlagBox, mixedFlagBox, utmixedFlagBox, longFlagBox, 
+                diffequFlagBox, teriFlagBox, utlongFlagBox, semidiFlagBox, diurnalFlagBox, asymannFlagBox, asymsemiFlagBox, symannFlagBox, symsemiFlagBox, timeFlagBox, f107FlagBox, unitsFlagBox};
+        }
+
+        private bool ValidateInput()
+        {
+            if (ValidateInputParameters())
+            {
+                ProfileOption[] enabledProfileOption = GetActiveProfileOptions();
+                if (enabledProfileOption != null && ValidateProfileOptions(enabledProfileOption))
+                {
+                    return true;
+                }
+                return false;
+                
+            }
+            return false;
+        }
+
+        private bool ValidateInputParameters()
+        {
+            bool[] errorIndex = new bool[7];
+            int errorCount = 0;
+
+            for (int i = 0; i < inputParams.Length; i++)
+            {
+                Control uiElement = inputParams[i];
+                switch(uiElement.Name)
+                {
+                    case "hodTextbox":
+                        errorIndex[i] = validate.Hour(inputParams[i].Text);
+                        break;
+
+                    case "latTextbox":
+                        errorIndex[i] = validate.Latitude(inputParams[i].Text);
+                        break;
+
+                    case "longTextbox":
+                        errorIndex[i] = validate.Longitude(inputParams[i].Text);
+                        break;
+
+                    case "altTextbox":
+                        errorIndex[i] = validate.Altitude(inputParams[i].Text);
+                        break;
+
+                    case "apTextbox":
+                    case "f107aTextbox":
+                    case "f107Textbox":
+                        errorIndex[i] = validate.F107AndAp(inputParams[i].Text);
+                        break;
+                }
+            }
+
+            for (int i = 0; i < errorIndex.Length; i++)
+            {
+                if (errorIndex[i] == false)
+                {
+                    errorCount++;
+                    inputParams[i].ForeColor = Color.Red;
+                }
+                else
+                {
+                    inputParams[i].ForeColor = Color.Black;
+                }
+            }
+
+            if (errorCount != 0)
+            {
+                statusLabel.Text = "Errors in input parameters";
+                MessageBox.Show("You have " + errorCount + " invalid input parameters");
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidateProfileOptions(ProfileOption[] enabledOptions)
+        {
+            bool[][] errorIndex = new bool[tabControl1.TabCount][];
+            int errorCount = 0;
+
+            for (int i = 0; i < enabledOptions.Length; i++)
+            {
+                ProfileOption currentOption = enabledOptions[i];
+                int errorTabIndex = (int)currentOption.method;
+                errorIndex[errorTabIndex] = validate.Profile(currentOption.startValue, currentOption.stopValue, currentOption.stepValue, currentOption.method);
+
+                if ((errorIndex[errorTabIndex][0] == true) || (errorIndex[errorTabIndex][1] == true) || (errorIndex[errorTabIndex][2] == true))
+                {
+                    errorCount++;
+                }
+            }
+
+            for (int i = 0; i < enabledOptions.Length; i++)
+            {
+                foreach (Control control in tabControl1.TabPages[i].Controls)
+                {
+                    if (control is TextBox tb)
+                    {
+                        switch(tb.Name)
+                        {
+                            case string a when a.Contains("Start"):
+                                ToggleError(tb, errorIndex[i][0]);
+                                break;
+
+                            case string b when b.Contains("Stop"):
+                                ToggleError(tb, errorIndex[i][1]);
+                                break;
+
+                            case string c when c.Contains("Step"):
+                                ToggleError(tb, errorIndex[i][2]);
+                                break;
+                        }
+                    }
+                }
+            }
+
+            if (errorCount != 0)
+            {
+                statusLabel.Text = "Errors in profile options";
+                MessageBox.Show("You have " + errorCount + " invalid profile options" +
+                    "\nPlease make sure the profile parameters fall within the required range." +
+                    "\nAlso ensure that the step value is smaller than the profile range.");
+                return false;
+            }
+            return true;
+        }
+
+        private ProfileOption[] GetActiveProfileOptions()
+        {
+            ProfileOption[] possibleProfileOptions = new ProfileOption[7];
+            int pagesEnabled = 0;
+
+            TabControl.TabPageCollection tabPages = tabControl1.TabPages;
+
+            for (int i = 0; i < tabPages.Count; i++)
+            {
+                TabPage currentPage = tabPages[i];
+                if (IsPageEnabled(currentPage))
+                {
+                    try
+                    {
+                        double[] profileOption = GetProfileValues(currentPage);
+
+                        possibleProfileOptions[pagesEnabled++] = new ProfileOption((ProfileMethod)i, profileOption[0], profileOption[1], profileOption[2]);
+                    }
+                    catch(ConversionException ce)
+                    {
+                        ToggleError(ce.callingElement, true);
+                        MessageBox.Show("Please fix the highlighted input value");
+                        return null;
+                    }
+                }
+            }
+            //Remove all empty indices from our array before returning
+            return possibleProfileOptions.Where(profile => profile != null).ToArray();
+        }
+
+        private bool IsPageEnabled(TabPage tabPage)
+        {
+            foreach (Control c in tabPage.Controls)
+            {
+                if (c is CheckBox checkBox)
+                {
+                    return checkBox.Checked;
+                }
+            }
+            return false;
+        }
+
+        private double[] GetProfileValues(TabPage tabPage)
+        {
+            double[] values = new double[3];
+
+            foreach (Control control in tabPage.Controls)
+            {
+                if (control is TextBox textBox)
+                {
+                    try
+                    {
+                        switch (textBox.Name)
+                        {
+                            case string a when a.Contains("Start"):
+                                values[0] = Convert.ToDouble(textBox.Text);
+                                ToggleError(textBox, false);
+                                break;
+
+                            case string b when b.Contains("Stop"):
+                                values[1] = Convert.ToDouble(textBox.Text);
+                                ToggleError(textBox, false);
+                                break;
+
+                            case string c when c.Contains("Step"):
+                                values[2] = Convert.ToDouble(textBox.Text);
+                                ToggleError(textBox, false);
+                                break;
+                        }
+                    }
+                    catch
+                    {
+                        throw new ConversionException(textBox);
+                    }
+                }
+            }
+            return values;
+        }
+
+        private void ToggleError(TextBox tb, bool errorPresent)
+        {
+            if (errorPresent)
+            {
+                tb.ForeColor = Color.Red;
+            }
+            else
+            {
+                tb.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+    }
+}
