@@ -286,6 +286,48 @@ namespace nrlmsise
             return values;
         }
 
+        private Flags GetInputFlags()
+        {
+            Flags selectedFlags = new Flags();
+
+            for (int i = 0; i < variationPanel.Controls.Count; i++)
+            {
+                if (variationPanel.Controls[i] is CheckBox cb)
+                {
+                    int tabIndex = cb.TabIndex;
+                    selectedFlags.Switches[tabIndex] = Convert.ToInt32(cb.Checked);
+                }
+            }
+
+            string apInput = dailyApFlagTextbox.Text;
+            if (validate.ApFlag(apInput))
+            {
+                ToggleError(dailyApFlagTextbox, false);
+                switch (apInput.Length)
+                {
+                    case 0:
+                        selectedFlags.Switches[9] = 0;
+                        break;
+                    case 1:
+                        selectedFlags.Switches[9] = Convert.ToInt32(apInput);
+                        break;
+                    default:
+                        selectedFlags.Switches[9] = -1;
+                        uiController.SetApArray(Array.ConvertAll(apInput.Split(','), double.Parse));
+                        break;
+                }
+            }
+            else
+            {
+                statusLabel.Text = "Invalid flag input";
+                MessageBox.Show("Daily ap flag is invalid");
+                ToggleError(dailyApFlagTextbox, true);
+                return null;
+            }
+            return selectedFlags;
+            
+        }
+
         private void ToggleError(TextBox tb, bool errorPresent)
         {
             if (errorPresent)
