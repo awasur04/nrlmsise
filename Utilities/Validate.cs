@@ -57,6 +57,11 @@ namespace nrlmsise
             return compare(inputValue, 0.0, 500);
         }
 
+        public bool ApFlag(string apValue)
+        {
+            return compare(apValue, 0, 6);
+        }
+
         public bool Month(double month)
         {
             return compare(month, 1.0, 12.0);
