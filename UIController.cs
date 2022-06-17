@@ -24,7 +24,22 @@ namespace nrlmsise
 
         }
 
+
+
         #region Utility functions
+        public void SetTestFlags(Flags inputFlags)
+        {
+            testFlags = inputFlags;
+        }
+
+        public void SetApArray(double[] apValues)
+        {
+            for (int i = 0; i < testInputs.Length; i++)
+            {
+                testInputs[i].Ap_array.Ap_Array = apValues;
+            }
+        }
+
         public double GetSeconds(string inputHours, bool utc, string longitude)
         {
             //sec = hrs + (-1 * (g_long/15))
