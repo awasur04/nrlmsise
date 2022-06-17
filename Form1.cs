@@ -51,7 +51,12 @@ namespace nrlmsise
 
         private void ResetFormButton_Click(object sender, EventArgs e)
         {
+            ResetForm(inputBox);
 
+            dateTimePicker1.Value = DateTime.Parse("6/21/2021 2:38 PM");
+            utcRadioButton.Checked = true;
+            lastRadioButton.Checked = false;
+            statusLabel.Text = "Ready";
         }
 
         private void GengraphButton_Click(object sender, EventArgs e)
@@ -73,9 +78,6 @@ namespace nrlmsise
             
             }
         }
-        #endregion
-
-        #region Utilities
         private void CreateUiArrays()
         {
             inputParams = new TextBox[] { hodTextbox, latTextbox, longTextbox, altTextbox, f107Textbox, f107aTextbox, apTextbox };
@@ -337,6 +339,43 @@ namespace nrlmsise
             else
             {
                 tb.ForeColor = Color.Black;
+            }
+        }
+
+        private void ResetForm(Control container)
+        {
+            foreach (Control control in container.Controls)
+            {
+                ResetControl(control);
+            }
+
+            if (container.Name == "inputBox")
+            {
+                ResetForm(tabControl1);
+            }
+            else if (container.Name == "tabControl1")
+            {
+                ResetForm(variationPanel);
+            }
+
+        }
+
+        public void ResetControl(Control control)
+        {
+            switch (control)
+            {
+                case TextBox tb:
+                    tb.Text = "";
+                    ToggleError(tb, false);
+                    break;
+
+                case CheckBox cb:
+                    cb.Checked = false;
+                    break;
+
+                case TabPage tabPage:
+                    ResetForm(tabPage);
+                    break;
             }
         }
         #endregion
