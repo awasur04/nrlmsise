@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.inputBox1 = new System.Windows.Forms.GroupBox();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.inputBox = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lastRadioButton = new System.Windows.Forms.RadioButton();
             this.utcRadioButton = new System.Windows.Forms.RadioButton();
@@ -54,7 +56,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.poptionsBox2 = new System.Windows.Forms.GroupBox();
+            this.profOptionsBox = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.altitudePage = new System.Windows.Forms.TabPage();
             this.label48 = new System.Windows.Forms.Label();
@@ -133,7 +135,7 @@
             this.hourProfStartBox = new System.Windows.Forms.TextBox();
             this.hourProfStopBox = new System.Windows.Forms.TextBox();
             this.hodTabEnable = new System.Windows.Forms.CheckBox();
-            this.modelBox3 = new System.Windows.Forms.GroupBox();
+            this.modelBox = new System.Windows.Forms.GroupBox();
             this.disableallFlagButton = new System.Windows.Forms.Button();
             this.enablallFlagButton = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
@@ -168,9 +170,10 @@
             this.expjsonButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
-            this.inputBox1.SuspendLayout();
+            this.apToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.inputBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.poptionsBox2.SuspendLayout();
+            this.profOptionsBox.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.altitudePage.SuspendLayout();
             this.latPage.SuspendLayout();
@@ -179,41 +182,41 @@
             this.domPage.SuspendLayout();
             this.doyPage.SuspendLayout();
             this.hodPage.SuspendLayout();
-            this.modelBox3.SuspendLayout();
+            this.modelBox.SuspendLayout();
             this.variationPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // inputBox1
+            // inputBox
             // 
-            this.inputBox1.Controls.Add(this.groupBox1);
-            this.inputBox1.Controls.Add(this.label61);
-            this.inputBox1.Controls.Add(this.label17);
-            this.inputBox1.Controls.Add(this.apTextbox);
-            this.inputBox1.Controls.Add(this.label14);
-            this.inputBox1.Controls.Add(this.label15);
-            this.inputBox1.Controls.Add(this.f107Textbox);
-            this.inputBox1.Controls.Add(this.label12);
-            this.inputBox1.Controls.Add(this.label13);
-            this.inputBox1.Controls.Add(this.f107aTextbox);
-            this.inputBox1.Controls.Add(this.label11);
-            this.inputBox1.Controls.Add(this.label10);
-            this.inputBox1.Controls.Add(this.altTextbox);
-            this.inputBox1.Controls.Add(this.label9);
-            this.inputBox1.Controls.Add(this.label8);
-            this.inputBox1.Controls.Add(this.longTextbox);
-            this.inputBox1.Controls.Add(this.label7);
-            this.inputBox1.Controls.Add(this.label6);
-            this.inputBox1.Controls.Add(this.latTextbox);
-            this.inputBox1.Controls.Add(this.hodTextbox);
-            this.inputBox1.Controls.Add(this.label2);
-            this.inputBox1.Controls.Add(this.label1);
-            this.inputBox1.Controls.Add(this.dateTimePicker1);
-            this.inputBox1.Location = new System.Drawing.Point(12, 12);
-            this.inputBox1.Name = "inputBox1";
-            this.inputBox1.Size = new System.Drawing.Size(783, 175);
-            this.inputBox1.TabIndex = 1;
-            this.inputBox1.TabStop = false;
-            this.inputBox1.Text = "Input Parameters";
+            this.inputBox.Controls.Add(this.groupBox1);
+            this.inputBox.Controls.Add(this.label61);
+            this.inputBox.Controls.Add(this.label17);
+            this.inputBox.Controls.Add(this.apTextbox);
+            this.inputBox.Controls.Add(this.label14);
+            this.inputBox.Controls.Add(this.label15);
+            this.inputBox.Controls.Add(this.f107Textbox);
+            this.inputBox.Controls.Add(this.label12);
+            this.inputBox.Controls.Add(this.label13);
+            this.inputBox.Controls.Add(this.f107aTextbox);
+            this.inputBox.Controls.Add(this.label11);
+            this.inputBox.Controls.Add(this.label10);
+            this.inputBox.Controls.Add(this.altTextbox);
+            this.inputBox.Controls.Add(this.label9);
+            this.inputBox.Controls.Add(this.label8);
+            this.inputBox.Controls.Add(this.longTextbox);
+            this.inputBox.Controls.Add(this.label7);
+            this.inputBox.Controls.Add(this.label6);
+            this.inputBox.Controls.Add(this.latTextbox);
+            this.inputBox.Controls.Add(this.hodTextbox);
+            this.inputBox.Controls.Add(this.label2);
+            this.inputBox.Controls.Add(this.label1);
+            this.inputBox.Controls.Add(this.dateTimePicker1);
+            this.inputBox.Location = new System.Drawing.Point(12, 12);
+            this.inputBox.Name = "inputBox";
+            this.inputBox.Size = new System.Drawing.Size(783, 175);
+            this.inputBox.TabIndex = 1;
+            this.inputBox.TabStop = false;
+            this.inputBox.Text = "Input Parameters";
             // 
             // groupBox1
             // 
@@ -447,15 +450,15 @@
             this.dateTimePicker1.TabIndex = 0;
             this.dateTimePicker1.Value = new System.DateTime(2021, 6, 21, 14, 38, 0, 0);
             // 
-            // poptionsBox2
+            // profOptionsBox
             // 
-            this.poptionsBox2.Controls.Add(this.tabControl1);
-            this.poptionsBox2.Location = new System.Drawing.Point(12, 193);
-            this.poptionsBox2.Name = "poptionsBox2";
-            this.poptionsBox2.Size = new System.Drawing.Size(783, 140);
-            this.poptionsBox2.TabIndex = 2;
-            this.poptionsBox2.TabStop = false;
-            this.poptionsBox2.Text = "Profile Options";
+            this.profOptionsBox.Controls.Add(this.tabControl1);
+            this.profOptionsBox.Location = new System.Drawing.Point(12, 193);
+            this.profOptionsBox.Name = "profOptionsBox";
+            this.profOptionsBox.Size = new System.Drawing.Size(783, 140);
+            this.profOptionsBox.TabIndex = 2;
+            this.profOptionsBox.TabStop = false;
+            this.profOptionsBox.Text = "Profile Options";
             // 
             // tabControl1
             // 
@@ -1231,18 +1234,18 @@
             this.hodTabEnable.Text = "Enable";
             this.hodTabEnable.UseVisualStyleBackColor = true;
             // 
-            // modelBox3
+            // modelBox
             // 
-            this.modelBox3.Controls.Add(this.disableallFlagButton);
-            this.modelBox3.Controls.Add(this.enablallFlagButton);
-            this.modelBox3.Controls.Add(this.label16);
-            this.modelBox3.Controls.Add(this.variationPanel);
-            this.modelBox3.Location = new System.Drawing.Point(12, 339);
-            this.modelBox3.Name = "modelBox3";
-            this.modelBox3.Size = new System.Drawing.Size(783, 232);
-            this.modelBox3.TabIndex = 3;
-            this.modelBox3.TabStop = false;
-            this.modelBox3.Text = "Model Flags";
+            this.modelBox.Controls.Add(this.disableallFlagButton);
+            this.modelBox.Controls.Add(this.enablallFlagButton);
+            this.modelBox.Controls.Add(this.label16);
+            this.modelBox.Controls.Add(this.variationPanel);
+            this.modelBox.Location = new System.Drawing.Point(12, 339);
+            this.modelBox.Name = "modelBox";
+            this.modelBox.Size = new System.Drawing.Size(783, 232);
+            this.modelBox.TabIndex = 3;
+            this.modelBox.TabStop = false;
+            this.modelBox.Text = "Model Flags";
             // 
             // disableallFlagButton
             // 
@@ -1313,8 +1316,9 @@
             this.dailyApFlagTextbox.Location = new System.Drawing.Point(3, 211);
             this.dailyApFlagTextbox.Name = "dailyApFlagTextbox";
             this.dailyApFlagTextbox.Size = new System.Drawing.Size(441, 20);
-            this.dailyApFlagTextbox.TabIndex = 26;
+            this.dailyApFlagTextbox.TabIndex = 9;
             this.dailyApFlagTextbox.Text = "0";
+            this.apToolTip.SetToolTip(this.dailyApFlagTextbox, resources.GetString("dailyApFlagTextbox.ToolTip"));
             // 
             // label19
             // 
@@ -1322,9 +1326,10 @@
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.Location = new System.Drawing.Point(0, 194);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(446, 13);
+            this.label19.Size = new System.Drawing.Size(176, 13);
             this.label19.TabIndex = 25;
-            this.label19.Text = "Daily AP (0 = Disabled, 1 = Enabled, Comma seperated list for multple values)";
+            this.label19.Text = "Daily AP (Hover for more info)";
+            this.apToolTip.SetToolTip(this.label19, resources.GetString("label19.ToolTip"));
             // 
             // tn3FlagBox
             // 
@@ -1402,7 +1407,7 @@
             this.turboFlagBox.Location = new System.Drawing.Point(588, 95);
             this.turboFlagBox.Name = "turboFlagBox";
             this.turboFlagBox.Size = new System.Drawing.Size(114, 17);
-            this.turboFlagBox.TabIndex = 15;
+            this.turboFlagBox.TabIndex = 23;
             this.turboFlagBox.Text = "Turbo scale height";
             this.turboFlagBox.UseVisualStyleBackColor = true;
             // 
@@ -1412,7 +1417,7 @@
             this.mixedFlagBox.Location = new System.Drawing.Point(588, 72);
             this.mixedFlagBox.Name = "mixedFlagBox";
             this.mixedFlagBox.Size = new System.Drawing.Size(143, 17);
-            this.mixedFlagBox.TabIndex = 14;
+            this.mixedFlagBox.TabIndex = 13;
             this.mixedFlagBox.Text = "Mixed AP/UT/Longitude";
             this.mixedFlagBox.UseVisualStyleBackColor = true;
             // 
@@ -1422,7 +1427,7 @@
             this.utmixedFlagBox.Location = new System.Drawing.Point(588, 49);
             this.utmixedFlagBox.Name = "utmixedFlagBox";
             this.utmixedFlagBox.Size = new System.Drawing.Size(162, 17);
-            this.utmixedFlagBox.TabIndex = 13;
+            this.utmixedFlagBox.TabIndex = 12;
             this.utmixedFlagBox.Text = "UT and mixed UT/Longitude";
             this.utmixedFlagBox.UseVisualStyleBackColor = true;
             // 
@@ -1432,7 +1437,7 @@
             this.longFlagBox.Location = new System.Drawing.Point(588, 26);
             this.longFlagBox.Name = "longFlagBox";
             this.longFlagBox.Size = new System.Drawing.Size(83, 17);
-            this.longFlagBox.TabIndex = 12;
+            this.longFlagBox.TabIndex = 11;
             this.longFlagBox.Text = "Longitudinal";
             this.longFlagBox.UseVisualStyleBackColor = true;
             // 
@@ -1442,7 +1447,7 @@
             this.diffequFlagBox.Location = new System.Drawing.Point(294, 95);
             this.diffequFlagBox.Name = "diffequFlagBox";
             this.diffequFlagBox.Size = new System.Drawing.Size(195, 17);
-            this.diffequFlagBox.TabIndex = 11;
+            this.diffequFlagBox.TabIndex = 15;
             this.diffequFlagBox.Text = "Departures from diffusive equilibrium";
             this.diffequFlagBox.UseVisualStyleBackColor = true;
             // 
@@ -1452,7 +1457,7 @@
             this.teriFlagBox.Location = new System.Drawing.Point(4, 118);
             this.teriFlagBox.Name = "teriFlagBox";
             this.teriFlagBox.Size = new System.Drawing.Size(73, 17);
-            this.teriFlagBox.TabIndex = 10;
+            this.teriFlagBox.TabIndex = 14;
             this.teriFlagBox.Text = "Terdiurnal";
             this.teriFlagBox.UseVisualStyleBackColor = true;
             // 
@@ -1462,7 +1467,7 @@
             this.utlongFlagBox.Location = new System.Drawing.Point(588, 3);
             this.utlongFlagBox.Name = "utlongFlagBox";
             this.utlongFlagBox.Size = new System.Drawing.Size(138, 17);
-            this.utlongFlagBox.TabIndex = 9;
+            this.utlongFlagBox.TabIndex = 10;
             this.utlongFlagBox.Text = "All UT/longitude effects";
             this.utlongFlagBox.UseVisualStyleBackColor = true;
             // 
@@ -1604,6 +1609,10 @@
             this.statusLabel.TabIndex = 8;
             this.statusLabel.Text = "Ready";
             // 
+            // apToolTip
+            // 
+            this.apToolTip.AutomaticDelay = 400;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1614,17 +1623,17 @@
             this.Controls.Add(this.expjsonButton);
             this.Controls.Add(this.gengraphButton);
             this.Controls.Add(this.resetFormButton);
-            this.Controls.Add(this.modelBox3);
-            this.Controls.Add(this.poptionsBox2);
-            this.Controls.Add(this.inputBox1);
+            this.Controls.Add(this.modelBox);
+            this.Controls.Add(this.profOptionsBox);
+            this.Controls.Add(this.inputBox);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "nrlmsise00";
-            this.inputBox1.ResumeLayout(false);
-            this.inputBox1.PerformLayout();
+            this.inputBox.ResumeLayout(false);
+            this.inputBox.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.poptionsBox2.ResumeLayout(false);
+            this.profOptionsBox.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.altitudePage.ResumeLayout(false);
             this.altitudePage.PerformLayout();
@@ -1640,8 +1649,8 @@
             this.doyPage.PerformLayout();
             this.hodPage.ResumeLayout(false);
             this.hodPage.PerformLayout();
-            this.modelBox3.ResumeLayout(false);
-            this.modelBox3.PerformLayout();
+            this.modelBox.ResumeLayout(false);
+            this.modelBox.PerformLayout();
             this.variationPanel.ResumeLayout(false);
             this.variationPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -1650,7 +1659,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.GroupBox inputBox1;
+        private System.Windows.Forms.GroupBox inputBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TextBox hodTextbox;
@@ -1672,7 +1681,7 @@
         private System.Windows.Forms.TextBox f107Textbox;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox apTextbox;
-        private System.Windows.Forms.GroupBox poptionsBox2;
+        private System.Windows.Forms.GroupBox profOptionsBox;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage altitudePage;
         private System.Windows.Forms.CheckBox altTabEnable;
@@ -1688,7 +1697,7 @@
         private System.Windows.Forms.CheckBox doyTabEnable;
         private System.Windows.Forms.TabPage hodPage;
         private System.Windows.Forms.CheckBox hodTabEnable;
-        private System.Windows.Forms.GroupBox modelBox3;
+        private System.Windows.Forms.GroupBox modelBox;
         private System.Windows.Forms.Panel variationPanel;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.CheckBox semidiFlagBox;
@@ -1790,6 +1799,7 @@
         private System.Windows.Forms.RadioButton utcRadioButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.ToolTip apToolTip;
     }
 }
 
