@@ -17,7 +17,7 @@ namespace nrlmsise
         public void DefineInputParameters(DateTime inputDate, string inputHours, string inputAlt, string inputLat, string inputLong, string f107a, string f107, string ap, bool utcSelected)
         {
             //testCount = CalculateTestCount();
-            testInputs = new Input[1];
+            testInputs = new Input[testCount];
 
             //START HERE FIGURE OUT LAST TIME
             testInputs[0] = new Input(inputDate.Year, inputDate.DayOfYear, GetSeconds(inputHours, utcSelected, inputLong), Convert.ToDouble(inputAlt), Convert.ToDouble(inputLat), Convert.ToDouble(inputLong), GetLastTime(inputHours, inputLong, utcSelected), Convert.ToDouble(f107a), Convert.ToDouble(f107), Convert.ToDouble(ap));
@@ -84,6 +84,17 @@ namespace nrlmsise
 
                 return currentHours;
             }
+        }
+
+        public void GetTotalTestCount(ProfileOption[] profileOptions)
+        {
+            testCount = 0;
+            for (int i = 0; i < profileOptions.Length; i++)
+            {
+                double difference = Math.Abs(profileOptions[i].stopValue - profileOptions[i].startValue);
+                testCount += (int)Math.Floor(difference / profileOptions[i].stepValue);
+            }
+            Console.WriteLine(testCount);
         }
         #endregion
     }
