@@ -16,13 +16,15 @@ namespace nrlmsise
     {
         private CheckBox[] flagBoxes;
         private TextBox[] inputParams;
-        private UIController uicontroller;
+
+        private ProfileOption[] enabledProfileOption;
+        private UIController uiController;
         private Validate validate = new Validate();
 
 
         public Form1()
         {
-            this.uicontroller = new UIController();
+            this.uiController = new UIController();
             InitializeComponent();
             statusLabel.Text = "Initializing";
 
