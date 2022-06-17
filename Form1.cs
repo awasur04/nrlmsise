@@ -63,21 +63,31 @@ namespace nrlmsise
 
         private void GengraphButton_Click(object sender, EventArgs e)
         {
-
+            Submit(1);
         }
 
         private void ExpjsonButton_Click(object sender, EventArgs e)
         {
+            Submit(0);
+        }
+        #endregion
+
+        #region Utilities
+        private void Submit(int method)
+        {
+            // 0: JSON
+            // 1: Graph
+
             statusLabel.Text = "Validating input";
             if (ValidateInput())
             {
-                statusLabel.Text = "Running simulations";
-                //Output[] testOutputs = Calculations.TestGTD7();
-                //Calculations.PrintOutput(testOutputs);
-                //statusLabel.Text = "Simulations complete";
+                Flags inputFlags = GetInputFlags();
+                if (inputFlags != null)
+                {
+                    uiController.SetTestFlags(inputFlags);
+                    statusLabel.Text = "Running simulations";
 
-                //uicontroller.DefineInputParameters(dateTimePicker1.Value, hodTextbox.Text, altTextbox.Text, latTextbox.Text, longTextbox.Text, f107aTextbox.Text, f107Textbox.Text, apTextbox.Text, utcRadioButton.Checked);
-            
+                }
             }
         }
         private void CreateUiArrays()
@@ -92,7 +102,7 @@ namespace nrlmsise
         {
             if (ValidateInputParameters())
             {
-                ProfileOption[] enabledProfileOption = GetActiveProfileOptions();
+                enabledProfileOption = GetActiveProfileOptions();
                 if (enabledProfileOption != null && ValidateProfileOptions(enabledProfileOption))
                 {
                     return true;
@@ -232,6 +242,7 @@ namespace nrlmsise
                     catch(ConversionException ce)
                     {
                         ToggleError(ce.callingElement, true);
+                        statusLabel.Text = "Errors in profile options";
                         MessageBox.Show("Please fix the highlighted input value");
                         return null;
                     }
