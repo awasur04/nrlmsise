@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace nrlmsise
 {
-    internal class Input
+    internal class Input : ICloneable
     {
         #region Properties
         /*
@@ -126,6 +126,25 @@ namespace nrlmsise
         {
             get { return ap_array; }
             set { ap_array = value; }
+        }
+        #endregion
+
+        #region Cloning
+        public Object Clone()
+        {
+            Input input = new Input();
+            input.Altitude = this.altitude;
+            input.DayOfYear = this.day_of_year;
+            input.Seconds = this.seconds;
+            input.Altitude = this.altitude;
+            input.G_lat = this.g_lat;
+            input.G_long = this.g_long;
+            input.Lst = this.lst;
+            input.F107A = this.f107A;
+            input.F107 = this.f107;
+            input.Ap = this.ap;
+            input.Ap_array = this.ap_array;
+            return input;
         }
         #endregion
     }

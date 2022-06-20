@@ -46,17 +46,22 @@ namespace nrlmsise
  */
     internal class Flags
     {
+        #region Properties
         int[] switches;
         double[] sw;
         double[] swc;
+        #endregion
 
+        #region Constructor
         public Flags()
         {
             this.switches = new int[24];
             this.sw = new double[24];
             this.swc = new double[24];
         }
+        #endregion
 
+        #region Getters & Setters
         public int[] Switches
         {
             get { return switches; }
@@ -72,7 +77,9 @@ namespace nrlmsise
         {
             get { return swc; }
         }
+        #endregion
 
+        #region Methods
         public void computeFlags()
         {
             for (int i = 0; i < switches.Length; i++)
@@ -108,7 +115,7 @@ namespace nrlmsise
                 }
             }
         }
-
+        #endregion
 
     }
 }
