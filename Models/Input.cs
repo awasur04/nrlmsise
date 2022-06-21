@@ -133,6 +133,7 @@ namespace nrlmsise
         public Object Clone()
         {
             Input input = new Input();
+            input.Year = this.year;
             input.Altitude = this.altitude;
             input.DayOfYear = this.day_of_year;
             input.Seconds = this.seconds;
