@@ -125,6 +125,10 @@ namespace nrlmsise
                     {
                         uiController.ExportResultsToJson(outputPath);
                     }
+                    else
+                    {
+                        uiController.ExportResultsToGraph();
+                    }
 
                     //Cleaup current test arrays
                     enabledProfileOption = null;
