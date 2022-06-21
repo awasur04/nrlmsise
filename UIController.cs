@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using nrlmsise.Enums;
+using nrlmsise.Models;
+using Newtonsoft.Json;
 
 namespace nrlmsise
 {
@@ -23,19 +27,19 @@ namespace nrlmsise
             PopulateTestData(inputParameters);
         }
 
-
-
-        #region Utility functions
         public void SetTestFlags(Flags inputFlags)
         {
-            testFlags = inputFlags;
+            currentTestFlags = inputFlags;
         }
 
         public void SetApArray(double[] apValues)
         {
-            for (int i = 0; i < testInputs.Length; i++)
+            for (int i = 0; i < testData.Length; i++)
             {
-                testInputs[i].Ap_array.Ap_Array = apValues;
+                for (int j = 0; j < testData[i].Length; i++)
+                {
+                    testData[i][j].Input.Ap_array.Ap_Array = apValues;
+                }
             }
         }
 
