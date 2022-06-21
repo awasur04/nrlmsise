@@ -29,11 +29,11 @@ namespace nrlmsise
         public Form1()
         {
             this.uiController = new UIController();
+
             InitializeComponent();
             statusLabel.Text = "Initializing";
-            directoryTextbox.Text = Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
-            outputPath = directoryTextbox.Text;
 
+            DefaultUISettings();
             CreateUiArrays();
             statusLabel.Text = "Ready";
         }
@@ -92,6 +92,14 @@ namespace nrlmsise
         #endregion
 
         #region Utilities
+
+        private void DefaultUISettings()
+        {
+            //Set Deafult Directory
+            directoryTextbox.Text = Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
+            outputPath = directoryTextbox.Text;
+
+        }
         private void Submit(int method)
         {
             // 0: JSON
@@ -130,7 +138,7 @@ namespace nrlmsise
             inputParams = new TextBox[] { hodTextbox, latTextbox, longTextbox, altTextbox, f107Textbox, f107aTextbox, apTextbox };
 
             flagBoxes = new CheckBox[] { tn3FlagBox, nlbFlagBox, tn2FlagBox, sFlagBox, tn1FlagBox, tlbFlagBox, tinfFlagBox, turboFlagBox, mixedFlagBox, utmixedFlagBox, longFlagBox, 
-                diffequFlagBox, teriFlagBox, utlongFlagBox, semidiFlagBox, diurnalFlagBox, asymannFlagBox, asymsemiFlagBox, symannFlagBox, symsemiFlagBox, timeFlagBox, f107FlagBox, unitsFlagBox};
+                diffequFlagBox, teriFlagBox, utlongFlagBox, semidiFlagBox, diurnalFlagBox, asymannFlagBox, asymsemiFlagBox, symannFlagBox, symsemiFlagBox, timeFlagBox, f107FlagBox};
         }
 
         private bool ValidateInput()
