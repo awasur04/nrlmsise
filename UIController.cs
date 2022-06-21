@@ -20,6 +20,7 @@ namespace nrlmsise
         {
             inputParameters = new Input(inputDate.Year, inputDate.DayOfYear, GetSeconds(inputHours, utcSelected, inputLong), Convert.ToDouble(inputAlt), Convert.ToDouble(inputLat), Convert.ToDouble(inputLong), GetLstTime(inputHours, inputLong, utcSelected), Convert.ToDouble(f107a), Convert.ToDouble(f107), Convert.ToDouble(ap));
 
+            PopulateTestData(inputParameters);
         }
 
 
@@ -91,6 +92,71 @@ namespace nrlmsise
             {
                 double difference = Math.Abs(profileOptions[i].stopValue - profileOptions[i].startValue);
                 testCount += (int)Math.Floor(difference / profileOptions[i].stepValue);
+        public void PopulateTestData(Input selectedInputParams)
+        {
+            if (currentProfileOptions.Length > 0)
+            {
+                //Every profile set
+                for (int i = 0; i < testData.Length; i++)
+                {
+                    ProfileOption selectedTestOptions = currentProfileOptions[i];
+                    int k = 0;
+
+                    for (double j = selectedTestOptions.startValue; j <= selectedTestOptions.stopValue; j += selectedTestOptions.stepValue)
+                    {
+                        testData[i][k] = new Test((Input)selectedInputParams.Clone(), currentTestFlags);
+                        CorrectProfileInputValues(selectedTestOptions.method, testData[i][k++].Input, j);
+                    }
+                }
+            }
+            else
+            {
+                testData[0][0] = new Test((Input)selectedInputParams.Clone(), currentTestFlags);
+            } 
+        }
+
+        public void CorrectProfileInputValues(ProfileMethod selectedMethod, Input input, double value)
+        {
+            DateTime currentDate;
+            DateTime newStartDate;
+
+            switch(selectedMethod)
+            {
+                case ProfileMethod.ALTITUDE:
+                    input.Altitude = value;
+                    break;
+
+                case ProfileMethod.LATITUDE:
+                    input.G_lat = value;
+                    break;
+
+                case ProfileMethod.LONGITUDE:
+                    input.G_long = value;
+                    break;
+
+                case ProfileMethod.MONTH:
+                    currentDate = new DateTime(input.Year, 1, 1).AddDays(input.DayOfYear - 1);
+                    newStartDate = new DateTime(input.Year, (int)value, currentDate.Day);
+                    input.DayOfYear = newStartDate.DayOfYear;
+                    break;
+
+                case ProfileMethod.DAY_OF_MONTH:
+                    currentDate = new DateTime(input.Year, 1, 1).AddDays(input.DayOfYear - 1);
+                    newStartDate = new DateTime(input.Year, currentDate.Month, (int)value);
+                    input.DayOfYear = newStartDate.DayOfYear;
+                    break;
+
+                case ProfileMethod.DAY_OF_YEAR:
+                    input.DayOfYear = (int)value;
+                    break;
+
+                case ProfileMethod.HOUR_OF_DAY:
+                    currentDate = new DateTime(input.Year, 1, 1).AddDays(input.DayOfYear - 1);
+                    newStartDate = new DateTime(input.Year, currentDate.Month, currentDate.Day).AddHours(value);
+                    input.Seconds = newStartDate.TimeOfDay.TotalSeconds;
+                    break;
+            }
+        }
             }
             Console.WriteLine(testCount);
         }
