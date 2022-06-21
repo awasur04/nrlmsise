@@ -123,7 +123,8 @@ namespace nrlmsise
             }
             else
             {
-                testData[0][0] = new Test((Input)selectedInputParams.Clone(), currentTestFlags);
+                testData = new Test[1][];
+                testData[0] = new Test[] { new Test((Input)selectedInputParams.Clone(), currentTestFlags)};
             } 
         }
 
