@@ -55,22 +55,26 @@ namespace nrlmsise.Models
         {
             Results = new Dictionary<string, string>
             {
-                { "TINF", ConvertToScientific(testOutput.Temperature[0]) },
-                { "TG", ConvertToScientific(testOutput.Temperature[1]) },
-                { "HE", ConvertToScientific(testOutput.Densities[0]) },
-                { "O", ConvertToScientific(testOutput.Densities[1]) },
-                { "N2", ConvertToScientific(testOutput.Densities[2]) },
-                { "O2", ConvertToScientific(testOutput.Densities[3]) },
-                { "AR", ConvertToScientific(testOutput.Densities[4]) },
-                { "H", ConvertToScientific(testOutput.Densities[6]) },
-                { "N", ConvertToScientific(testOutput.Densities[7]) },
-                { "ANM", ConvertToScientific(testOutput.Densities[8]) },
-                { "RHO", ConvertToScientific(testOutput.Densities[5]) }
+                { "TINF", ConvertToScientific(testOutput.Temperature[0]) + " K" },
+                { "TG", ConvertToScientific(testOutput.Temperature[1]) + " K" },
+                { "HE", ConvertToScientific(testOutput.Densities[0]) + " CM3"},
+                { "O", ConvertToScientific(testOutput.Densities[1]) + " CM3"},
+                { "N2", ConvertToScientific(testOutput.Densities[2]) + " CM3"},
+                { "O2", ConvertToScientific(testOutput.Densities[3]) + " CM3"},
+                { "AR", ConvertToScientific(testOutput.Densities[4]) + " CM3"},
+                { "H", ConvertToScientific(testOutput.Densities[6]) + " CM3"},
+                { "N", ConvertToScientific(testOutput.Densities[7]) + " CM3"},
+                { "ANM", ConvertToScientific(testOutput.Densities[8]) + " CM3"},
+                { "RHO", ConvertToScientific(testOutput.Densities[5]) + " GM/CM3"}
             };
         }
 
         public string ConvertToScientific(double value)
         {
+            if (Double.IsNaN(value) || Double.IsInfinity(value))
+            {
+                return "Not Available";
+            }
             return String.Format("{0:#.#####E+0}", value);
         }
     }
