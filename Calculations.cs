@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using nrlmsise.Models;
 
 namespace nrlmsise
 {
@@ -53,6 +53,15 @@ namespace nrlmsise
         public static double s3tloc, c3tloc;
         public static double apdf;
         public static double[] apt = new double[4];
+        #endregion
+
+        #region Run
+        public static Output Run(Test currentTest)
+        {
+            Output testOutput = new Output();
+            testOutput = GTD7(currentTest.Input, currentTest.Flags);
+            return testOutput;
+        }
         #endregion
 
         #region GTD7
