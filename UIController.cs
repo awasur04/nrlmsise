@@ -168,6 +168,22 @@ namespace nrlmsise
             }
             Console.WriteLine(testCount);
         }
+
+        public string GetPath(string path)
+        {
+            string directory = Path.GetDirectoryName(path);
+            string fileName = Path.GetFileNameWithoutExtension(path);
+            string fileExtension = Path.GetExtension(path);
+
+            for (int i = 0; ; i++)
+            {
+                if (!File.Exists(path))
+                {
+                    return path;
+                }
+
+                path = Path.Combine(directory, fileName + "_" + i + fileExtension);
+            }
         #endregion
     }
 }
