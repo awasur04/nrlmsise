@@ -68,5 +68,10 @@ namespace nrlmsise.Models
                 { "RHO", ConvertToScientific(testOutput.Densities[5]) }
             };
         }
+
+        public string ConvertToScientific(double value)
+        {
+            return String.Format("{0:#.#####E+0}", value);
+        }
     }
 }
