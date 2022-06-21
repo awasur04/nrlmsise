@@ -81,7 +81,9 @@ namespace nrlmsise
         {
             //Bool Errors {START, STOP, STEP}
             bool[] profileCheck = ProfileIntervalsCheck(start, stop, step);
-            if (profileCheck == new bool[] { false, false, false})
+            bool[] noErrorArray = new bool[] { false, false, false };
+            
+            if (Enumerable.SequenceEqual(profileCheck, noErrorArray))
             {
                 switch(method)
                 {
