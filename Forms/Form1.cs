@@ -32,6 +32,7 @@ namespace nrlmsise
             InitializeComponent();
             statusLabel.Text = "Initializing";
             directoryTextbox.Text = Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
+            outputPath = directoryTextbox.Text;
 
             CreateUiArrays();
             statusLabel.Text = "Ready";
@@ -111,6 +112,12 @@ namespace nrlmsise
                     uiController.RunTests();
 
                     statusLabel.Text = "Calculations complete";
+
+                    if (method == 0)
+                    {
+                        uiController.ExportResultsToJson(outputPath);
+                    }
+
                     //Cleaup current test arrays
                     enabledProfileOption = null;
 

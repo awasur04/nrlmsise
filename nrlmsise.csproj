@@ -75,7 +75,6 @@
     <Compile Include="Utilities\ProfileOption.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\ScientificDisplay.cs" />
     <Compile Include="UIController.cs" />
     <Compile Include="Utilities\Validate.cs" />
     <EmbeddedResource Include="Forms\Form1.resx">

@@ -181,8 +181,10 @@ namespace nrlmsise
             }
         }
 
-            }
-            Console.WriteLine(testCount);
+        public void ExportResultsToJson(string path)
+        {
+            string jsonOutput = JsonConvert.SerializeObject(new JSONOutput(currentProfileOptions, testData, inputParameters), Formatting.Indented);
+            System.IO.File.WriteAllText(GetPath(path + "\\output.json"), jsonOutput);
         }
 
         public string GetPath(string path)
