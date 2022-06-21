@@ -188,6 +188,12 @@ namespace nrlmsise
             System.IO.File.WriteAllText(GetPath(path + "\\output.json"), jsonOutput);
         }
 
+        public void ExportResultsToGraph()
+        {
+            var graphForm = new GraphResults(inputParameters, testData, currentProfileOptions);
+            graphForm.Show();
+        }
+
         public string GetPath(string path)
         {
             string directory = Path.GetDirectoryName(path);
