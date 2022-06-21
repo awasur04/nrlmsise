@@ -165,6 +165,18 @@ namespace nrlmsise
                     break;
             }
         }
+
+        public void RunTests()
+        {
+            for (int i = 0; i < testData.Length; i++)
+            {
+                for (int j = 0; j < testData[i].Length; j++)
+                {
+                    testData[i][j].Output = Calculations.Run(testData[i][j]);
+                }
+            }
+        }
+
             }
             Console.WriteLine(testCount);
         }
@@ -184,6 +196,9 @@ namespace nrlmsise
 
                 path = Path.Combine(directory, fileName + "_" + i + fileExtension);
             }
+        }
+
+        
         #endregion
     }
 }
