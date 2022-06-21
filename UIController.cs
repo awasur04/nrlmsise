@@ -62,7 +62,7 @@ namespace nrlmsise
             }
         }
 
-        public double GetLastTime(string inputHours, string longitude, bool utc)
+        public double GetLstTime(string inputHours, string longitude, bool utc)
         {
             //lst = (sec/3600) + (g_long/15)
             double hours = Convert.ToDouble(inputHours);
