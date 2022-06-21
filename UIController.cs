@@ -8,11 +8,12 @@ namespace nrlmsise
 {
     internal class UIController
     {
-        private int testCount;
-        private Input[] testInputs;
-        private Flags testFlags;
-        private Output[] testOutputs;
-        public UIController() { }
+        #region Properties
+        private Flags currentTestFlags;
+        private Test[][] testData;
+        private ProfileOption[] currentProfileOptions;
+        private Input inputParameters;
+        #endregion
 
         public void DefineInputParameters(DateTime inputDate, string inputHours, string inputAlt, string inputLat, string inputLong, string f107a, string f107, string ap, bool utcSelected)
         {
