@@ -221,11 +221,11 @@ namespace nrlmsise
                 }
             }
 
-            for (int i = 0; i < enabledOptions.Length; i++)
+            for (int i = 0; i < errorIndex.Length; i++)
             {
                 foreach (Control control in tabControl1.TabPages[i].Controls)
                 {
-                    if (control is TextBox tb)
+                    if ( (control is TextBox tb) && (errorIndex[i] != null) )
                     {
                         switch(tb.Name)
                         {
