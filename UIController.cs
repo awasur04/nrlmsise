@@ -85,13 +85,21 @@ namespace nrlmsise
             }
         }
 
-        public void GetTotalTestCount(ProfileOption[] profileOptions)
+        public void CalculateTestCount(ProfileOption[] profileOptions)
         {
-            testCount = 0;
+            currentProfileOptions = profileOptions;
+
+            testData = new Test[profileOptions.Length][];
+
             for (int i = 0; i < profileOptions.Length; i++)
             {
                 double difference = Math.Abs(profileOptions[i].stopValue - profileOptions[i].startValue);
-                testCount += (int)Math.Floor(difference / profileOptions[i].stepValue);
+                int testsRequired = (int)Math.Floor(difference / profileOptions[i].stepValue);
+
+                testData[i] = new Test[testsRequired + 1];
+            }
+        }
+
         public void PopulateTestData(Input selectedInputParams)
         {
             if (currentProfileOptions.Length > 0)
