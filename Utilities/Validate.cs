@@ -9,8 +9,6 @@ namespace nrlmsise
 {
     internal class Validate
     {
-        public Validate()
-        {}
         #region Value Checks
         public bool Hour(string inputHour)
         {
