@@ -555,17 +555,11 @@ namespace nrlmsise
         #endregion
 
         #region Test Function
-        public static Output[] TestGTD7()
+        public static void TestGTD7()
         {
-            Output[] testOutput = new Output[17];
-            Input[] testInput = new Input[17];
+            Output[] testOutput = new Output[11];
+            Input[] testInput = new Input[11];
             Flags testFlags = new Flags();
-            AP aph = new AP();
-
-            for (int i = 0; i < 7; i++)
-            {
-                aph.Ap_Array[i] = 100;
-            }
 
             testFlags.Switches[0] = 0;
 
@@ -574,7 +568,7 @@ namespace nrlmsise
                 testFlags.Switches[i] = 1;
             }
 
-            for (int i = 0; i < 17; i++)
+            for (int i = 0; i < 11; i++)
             {
                 testInput[i] = new Input();
                 testInput[i].DayOfYear = 172;
@@ -583,44 +577,28 @@ namespace nrlmsise
                 testInput[i].Altitude = 400;
                 testInput[i].G_lat = 60;
                 testInput[i].G_long = -70;
-                testInput[i].Lst = 16;
+                testInput[i].Lst = 3.38888;
                 testInput[i].F107A = 150;
                 testInput[i].F107 = 150;
                 testInput[i].Ap = 4;
             }
-
-            testInput[1].DayOfYear = 81;
-            testInput[2].Seconds = 75000;
-            testInput[2].Altitude = 1000;
-            testInput[3].Altitude = 100;
-            testInput[10].Altitude = 0;
-            testInput[11].Altitude = 10;
-            testInput[12].Altitude = 30;
-            testInput[13].Altitude = 50;
-            testInput[14].Altitude = 70;
-            testInput[16].Altitude = 100;
-            testInput[4].G_lat = 0;
-            testInput[5].G_long= 0;
-            testInput[6].Lst = 4;
-            testInput[7].F107A = 70;
-            testInput[8].F107 = 180;
-            testInput[9].Ap = 40;
-            testInput[15].Ap_array = aph;
-            testInput[16].Ap_array = aph;
+            testInput[0].Altitude = 0;
+            testInput[1].Altitude = 10;
+            testInput[2].Altitude = 20;
+            testInput[3].Altitude = 30;
+            testInput[4].Altitude = 40;
+            testInput[5].Altitude = 50;
+            testInput[6].Altitude = 60;
+            testInput[7].Altitude = 70;
+            testInput[8].Altitude = 80;
+            testInput[9].Altitude = 90;
+            testInput[10].Altitude = 100;
 
             //Evaluate 0 to 14
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 11; i++)
             {
                 testOutput[i] = GTD7(testInput[i], testFlags);
             }
-
-            testFlags.Switches[9] = -1;
-
-            for (int i = 15; i < 17; i++)
-            {
-                testOutput[i] = GTD7(testInput[i], testFlags);
-            }
-            return testOutput;
         }
         #endregion
 
