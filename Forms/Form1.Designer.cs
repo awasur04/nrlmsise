@@ -166,7 +166,6 @@
             this.symannFlagBox = new System.Windows.Forms.CheckBox();
             this.timeFlagBox = new System.Windows.Forms.CheckBox();
             this.f107FlagBox = new System.Windows.Forms.CheckBox();
-            this.unitsFlagBox = new System.Windows.Forms.CheckBox();
             this.resetFormButton = new System.Windows.Forms.Button();
             this.gengraphButton = new System.Windows.Forms.Button();
             this.expjsonButton = new System.Windows.Forms.Button();
@@ -1254,7 +1253,7 @@
             // 
             // directoryTextbox
             // 
-            this.directoryTextbox.Location = new System.Drawing.Point(332, 205);
+            this.directoryTextbox.Location = new System.Drawing.Point(314, 205);
             this.directoryTextbox.Name = "directoryTextbox";
             this.directoryTextbox.Size = new System.Drawing.Size(328, 20);
             this.directoryTextbox.TabIndex = 5;
@@ -1262,11 +1261,11 @@
             // 
             // directoryButton
             // 
-            this.directoryButton.Location = new System.Drawing.Point(667, 203);
+            this.directoryButton.Location = new System.Drawing.Point(648, 203);
             this.directoryButton.Name = "directoryButton";
-            this.directoryButton.Size = new System.Drawing.Size(112, 23);
+            this.directoryButton.Size = new System.Drawing.Size(131, 23);
             this.directoryButton.TabIndex = 4;
-            this.directoryButton.Text = "Select directory";
+            this.directoryButton.Text = "Select Export Directory";
             this.directoryButton.UseVisualStyleBackColor = true;
             this.directoryButton.Click += new System.EventHandler(this.directoryButton_Click);
             // 
@@ -1328,7 +1327,6 @@
             this.variationPanel.Controls.Add(this.symannFlagBox);
             this.variationPanel.Controls.Add(this.timeFlagBox);
             this.variationPanel.Controls.Add(this.f107FlagBox);
-            this.variationPanel.Controls.Add(this.unitsFlagBox);
             this.variationPanel.Location = new System.Drawing.Point(6, 32);
             this.variationPanel.Name = "variationPanel";
             this.variationPanel.Size = new System.Drawing.Size(771, 165);
@@ -1357,7 +1355,7 @@
             // tn3FlagBox
             // 
             this.tn3FlagBox.AutoSize = true;
-            this.tn3FlagBox.Location = new System.Drawing.Point(294, 165);
+            this.tn3FlagBox.Location = new System.Drawing.Point(588, 141);
             this.tn3FlagBox.Name = "tn3FlagBox";
             this.tn3FlagBox.Size = new System.Drawing.Size(106, 17);
             this.tn3FlagBox.TabIndex = 22;
@@ -1377,7 +1375,7 @@
             // tn2FlagBox
             // 
             this.tn2FlagBox.AutoSize = true;
-            this.tn2FlagBox.Location = new System.Drawing.Point(588, 142);
+            this.tn2FlagBox.Location = new System.Drawing.Point(588, 118);
             this.tn2FlagBox.Name = "tn2FlagBox";
             this.tn2FlagBox.Size = new System.Drawing.Size(106, 17);
             this.tn2FlagBox.TabIndex = 20;
@@ -1397,7 +1395,7 @@
             // tn1FlagBox
             // 
             this.tn1FlagBox.AutoSize = true;
-            this.tn1FlagBox.Location = new System.Drawing.Point(588, 118);
+            this.tn1FlagBox.Location = new System.Drawing.Point(588, 95);
             this.tn1FlagBox.Name = "tn1FlagBox";
             this.tn1FlagBox.Size = new System.Drawing.Size(106, 17);
             this.tn1FlagBox.TabIndex = 18;
@@ -1427,7 +1425,7 @@
             // turboFlagBox
             // 
             this.turboFlagBox.AutoSize = true;
-            this.turboFlagBox.Location = new System.Drawing.Point(588, 95);
+            this.turboFlagBox.Location = new System.Drawing.Point(4, 3);
             this.turboFlagBox.Name = "turboFlagBox";
             this.turboFlagBox.Size = new System.Drawing.Size(114, 17);
             this.turboFlagBox.TabIndex = 23;
@@ -1574,19 +1572,9 @@
             this.f107FlagBox.Text = "F10.7 effect on mean";
             this.f107FlagBox.UseVisualStyleBackColor = true;
             // 
-            // unitsFlagBox
-            // 
-            this.unitsFlagBox.AutoSize = true;
-            this.unitsFlagBox.Location = new System.Drawing.Point(4, 3);
-            this.unitsFlagBox.Name = "unitsFlagBox";
-            this.unitsFlagBox.Size = new System.Drawing.Size(204, 17);
-            this.unitsFlagBox.TabIndex = 0;
-            this.unitsFlagBox.Text = "Output in m and kg (default cm and g)";
-            this.unitsFlagBox.UseVisualStyleBackColor = true;
-            // 
             // resetFormButton
             // 
-            this.resetFormButton.Location = new System.Drawing.Point(435, 577);
+            this.resetFormButton.Location = new System.Drawing.Point(679, 576);
             this.resetFormButton.Name = "resetFormButton";
             this.resetFormButton.Size = new System.Drawing.Size(116, 23);
             this.resetFormButton.TabIndex = 4;
@@ -1596,7 +1584,7 @@
             // 
             // gengraphButton
             // 
-            this.gengraphButton.Location = new System.Drawing.Point(557, 577);
+            this.gengraphButton.Location = new System.Drawing.Point(435, 576);
             this.gengraphButton.Name = "gengraphButton";
             this.gengraphButton.Size = new System.Drawing.Size(116, 23);
             this.gengraphButton.TabIndex = 5;
@@ -1606,7 +1594,7 @@
             // 
             // expjsonButton
             // 
-            this.expjsonButton.Location = new System.Drawing.Point(679, 577);
+            this.expjsonButton.Location = new System.Drawing.Point(557, 576);
             this.expjsonButton.Name = "expjsonButton";
             this.expjsonButton.Size = new System.Drawing.Size(116, 23);
             this.expjsonButton.TabIndex = 6;
@@ -1649,6 +1637,8 @@
             this.Controls.Add(this.modelBox);
             this.Controls.Add(this.profOptionsBox);
             this.Controls.Add(this.inputBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "nrlmsise00";
@@ -1731,7 +1721,6 @@
         private System.Windows.Forms.CheckBox symannFlagBox;
         private System.Windows.Forms.CheckBox timeFlagBox;
         private System.Windows.Forms.CheckBox f107FlagBox;
-        private System.Windows.Forms.CheckBox unitsFlagBox;
         private System.Windows.Forms.CheckBox turboFlagBox;
         private System.Windows.Forms.CheckBox mixedFlagBox;
         private System.Windows.Forms.CheckBox utmixedFlagBox;
