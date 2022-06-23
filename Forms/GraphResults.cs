@@ -207,6 +207,29 @@ namespace nrlmsise
             return groupBox;
         }
 
+        public GroupBox CreateSelectionBox()
+        {
+            GroupBox groupBox = new GroupBox();
+            groupBox.Location = new System.Drawing.Point(442, 13);
+            groupBox.Name = "selectionGroupBox";
+            groupBox.Size = new System.Drawing.Size(270, 55);
+            groupBox.Text = "Closest Point";
+
+            //X label
+            Label xLabel = CreateProfileLabel("X: ");
+            xLabel.Name = "xLabel";
+            groupBox.Controls.Add(xLabel);
+            xLabel.Location = new System.Drawing.Point(6, 16);
+
+            //X label
+            Label yLabel = CreateProfileLabel("Y: ");
+            yLabel.Name = "yLabel";
+            groupBox.Controls.Add(yLabel);
+            yLabel.Location = new System.Drawing.Point(6, 29);
+
+            return groupBox;
+        }
+
         public Label CreateProfileLabel(string text)
         {
             Label label = new Label();
