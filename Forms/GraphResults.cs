@@ -91,11 +91,13 @@ namespace nrlmsise
             {
                 TabPage tp = new TabPage(profileOptions[i].method.ToString() + "TabPage");
                 tp.Controls.Add(CreateProfileGroupBox(profileOptions[i]));
+                tp.Controls.Add(CreateSelectionBox());
                 tp.Controls.Add(CreateProfileTabControls(profileOptions[i], i));
                 tp.Text = profileOptions[i].method.ToString();
                 tp.Location = new System.Drawing.Point(4, 22);
                 tp.Size = new System.Drawing.Size(863, 558);
                 tp.UseVisualStyleBackColor = true;
+
                 tabControl1.TabPages.Add(tp);
             }
         }
@@ -130,22 +132,24 @@ namespace nrlmsise
             chart.Location = new System.Drawing.Point(3, 6);
             chart.Size = new System.Drawing.Size(835, 440);
 
-            chartArea.AxisX.Title = "Profile Step Value";
-            chartArea.AxisY.Title = GetProperUnits(outputIndex);
-            chartArea.AxisY.LabelStyle.Format = "{0:#.#####E+0}";
             chart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Chart_MouseClick);
 
             chartArea.AxisX.Title = profileOptions[profileIndex].method.ToString() + " (" + GetProperXAxisUnits(profileOptions[profileIndex].method) + ")";
             chartArea.AxisY.Title = "Logarithmic Base 10 Representation\n" + GetProperYAxisUnits(outputIndex);
+            chartArea.CursorX.IsUserEnabled = true;
+            chartArea.CursorX.IsUserSelectionEnabled = true;
+            chartArea.AxisY.IsStartedFromZero = false;
+            chartArea.AxisY.LogarithmBase = 10;
 
             Series series1 = new Series
             {
                 Name = outputVariables[outputIndex],
                 Color = System.Drawing.Color.Blue,
                 ChartType = SeriesChartType.Line,
-                IsVisibleInLegend = true,
                 IsValueShownAsLabel = true,
-                MarkerStyle = MarkerStyle.Diamond
+                MarkerStyle = MarkerStyle.Circle,
+                MarkerSize = 9,
+                BorderWidth = 3
             };
 
             series1.SmartLabelStyle.AllowOutsidePlotArea = LabelOutsidePlotAreaStyle.Partial;
@@ -172,10 +176,10 @@ namespace nrlmsise
                 }
             }
 
-
             chart.Series.Clear();
             chart.ChartAreas.Add(chartArea);
             chart.Series.Add(series1);
+
             return chart;
         }
 
