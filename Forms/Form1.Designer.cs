@@ -505,6 +505,7 @@
             this.label48.Size = new System.Drawing.Size(136, 13);
             this.label48.TabIndex = 9;
             this.label48.Text = "Valid range (0km - 1000km)";
+            this.apToolTip.SetToolTip(this.label48, "Values under 100km may be inaccurate.");
             // 
             // label41
             // 
@@ -554,6 +555,7 @@
             this.label18.Size = new System.Drawing.Size(38, 13);
             this.label18.TabIndex = 4;
             this.label18.Text = "Start:";
+            this.apToolTip.SetToolTip(this.label18, "Values under 100km may be inaccurate.");
             // 
             // altProfStepBox
             // 
@@ -569,6 +571,7 @@
             this.altProfStartBox.Size = new System.Drawing.Size(124, 20);
             this.altProfStartBox.TabIndex = 2;
             this.altProfStartBox.Text = "\r\n";
+            this.apToolTip.SetToolTip(this.altProfStartBox, "Values under 100km may be inaccurate.");
             // 
             // altProfStopBox
             // 
@@ -1589,6 +1592,7 @@
             this.gengraphButton.Size = new System.Drawing.Size(116, 23);
             this.gengraphButton.TabIndex = 5;
             this.gengraphButton.Text = "Generate Graph";
+            this.apToolTip.SetToolTip(this.gengraphButton, "Profile option must be enabled to show results on a graph.");
             this.gengraphButton.UseVisualStyleBackColor = true;
             this.gengraphButton.Click += new System.EventHandler(this.GengraphButton_Click);
             // 
