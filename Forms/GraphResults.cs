@@ -17,11 +17,15 @@ namespace nrlmsise
     internal partial class GraphResults : Form
     {
 
+        #region Global Properties
         Input initialInput;
         Test[][] testData;
         ProfileOption[] profileOptions;
 
         string[] outputVariables = new string[] { "HELIUM (HE)", "OXYGEN (O)", "DINITROGEN (N2)", "DIOXYGEN (O2)", "ARGON (AR)", "TOTAL MASS DENSITY (GM/CM3)", "HYDROGEN (H)", "NITROGEN (N)", "ANON. O. DENSITY", "EXOSPHERIC TEMP.", "TEMP. AT ALT." };
+        #endregion
+
+        #region Constructor
         public GraphResults(Input initialInput, Test[][] testData, ProfileOption[] profileOptions)
         {
             this.initialInput = initialInput;
@@ -32,8 +36,13 @@ namespace nrlmsise
             DisplayInputParameters();
             CreateProfileTabs();
         }
+        #endregion
 
+        #region Event Handlers
 
+        #endregion
+
+        #region Creation Methods
         public void DisplayInputParameters()
         {
             string inputData = JsonConvert.SerializeObject(this.initialInput, Formatting.Indented);
@@ -161,6 +170,9 @@ namespace nrlmsise
             label.Text = text;
             return label;
         }
+        #endregion
+
+        #region Utilities
 
         public string GetProperUnits(int index)
         {
