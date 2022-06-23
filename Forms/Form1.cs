@@ -261,7 +261,7 @@ namespace nrlmsise
             if (errorCount != 0)
             {
                 statusLabel.Text = "Errors in profile options";
-                MessageBox.Show("You have " + errorCount + " invalid profile options" +
+                MessageBox.Show("You have " + errorCount + " invalid profile options." +
                     "\nPlease make sure the profile parameters fall within the required range." +
                     "\nAlso ensure that the step value is smaller than the profile range.");
                 return false;
@@ -291,7 +291,8 @@ namespace nrlmsise
                     {
                         ToggleError(ce.callingElement, true);
                         statusLabel.Text = "Errors in profile options";
-                        MessageBox.Show("Please fix the highlighted input value");
+                        MessageBox.Show("You have invalid parameters in your profile options." +
+                            "\nPlease correct the highlighted values.");
                         return null;
                     }
                 }

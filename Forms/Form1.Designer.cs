@@ -268,9 +268,9 @@
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Location = new System.Drawing.Point(611, 127);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(53, 13);
+            this.label17.Size = new System.Drawing.Size(55, 13);
             this.label17.TabIndex = 24;
-            this.label17.Text = "Daily ap";
+            this.label17.Text = "Daily AP";
             // 
             // apTextbox
             // 
@@ -1577,7 +1577,7 @@
             // 
             // resetFormButton
             // 
-            this.resetFormButton.Location = new System.Drawing.Point(679, 576);
+            this.resetFormButton.Location = new System.Drawing.Point(435, 576);
             this.resetFormButton.Name = "resetFormButton";
             this.resetFormButton.Size = new System.Drawing.Size(116, 23);
             this.resetFormButton.TabIndex = 4;
@@ -1587,7 +1587,7 @@
             // 
             // gengraphButton
             // 
-            this.gengraphButton.Location = new System.Drawing.Point(435, 576);
+            this.gengraphButton.Location = new System.Drawing.Point(557, 576);
             this.gengraphButton.Name = "gengraphButton";
             this.gengraphButton.Size = new System.Drawing.Size(116, 23);
             this.gengraphButton.TabIndex = 5;
@@ -1598,7 +1598,7 @@
             // 
             // expjsonButton
             // 
-            this.expjsonButton.Location = new System.Drawing.Point(557, 576);
+            this.expjsonButton.Location = new System.Drawing.Point(679, 576);
             this.expjsonButton.Name = "expjsonButton";
             this.expjsonButton.Size = new System.Drawing.Size(116, 23);
             this.expjsonButton.TabIndex = 6;
