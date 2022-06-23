@@ -176,5 +176,85 @@ namespace nrlmsise
 
             return "DENSITY (CM3)";
         }
+
+        public string GetProperXAxisUnits(ProfileMethod profileMethod)
+        {
+            switch(profileMethod)
+            {
+                case ProfileMethod.ALTITUDE:
+                    return "KMs";
+
+                case ProfileMethod.LATITUDE:
+                case ProfileMethod.LONGITUDE:
+                    return "DEGs";
+
+                case ProfileMethod.MONTH:
+                    return "MONTHs";
+
+                case ProfileMethod.DAY_OF_MONTH:
+                case ProfileMethod.DAY_OF_YEAR:
+                    return "DAYs";
+
+                case ProfileMethod.HOUR_OF_DAY:
+                    return "HOURs";
+
+                default:
+                    return "";
+            }
+        }
+
+        public string GetXUnitsFromParent(string parentText)
+        {
+            switch(parentText)
+            {
+                case "ALTITUDE":
+                    return " KMs";
+
+                case "LATITUDE":
+                case "LONGITUDE":
+                    return " DEGs";
+
+                case "MONTH":
+                    return " months";
+
+                case "DAY_OF_MONTH":
+                case "DAY_OF_YEAR":
+                    return " days";
+
+                case "HOUR_OF_DAY":
+                    return " hours";
+
+                default:
+                    return "";
+            }
+        }
+
+        public string GetYUnitsFromParent(string parentText)
+        {
+            int index = Array.IndexOf(outputVariables, parentText);
+            switch (index)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 7:
+                case 6:
+                case 8:
+                    return " CM3";
+
+                case 5:
+                    return " GM/CM3";
+
+                case 9:
+                case 10:
+                    return " K";
+
+                default:
+                    return "";
+            }
+        }
+        #endregion
     }
 }
