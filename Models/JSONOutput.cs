@@ -3,22 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace nrlmsise.Models
 {
     internal class JSONOutput
     {
         public Input inputParameters;
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public JSONOutputProfile[] ProfileOutputs;
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public JSONTestOutput TestOutput;
 
         public JSONOutput(ProfileOption[] profileOptions, Test[][] testData, Input defaultInputParameters)
         {
             inputParameters = defaultInputParameters;
-            ProfileOutputs = new JSONOutputProfile[testData.Length];
 
-            for (int i = 0; i < testData.Length; i++)
+            if (profileOptions.Length > 0)
             {
-                ProfileOutputs[i] = new JSONOutputProfile(profileOptions[i], testData[i]);
+                ProfileOutputs = new JSONOutputProfile[testData.Length];
+                for (int i = 0; i < testData.Length; i++)
+                {
+                    ProfileOutputs[i] = new JSONOutputProfile(profileOptions[i], testData[i]);
+                }
+            }
+            else
+            {
+                TestOutput = new JSONTestOutput(testData[0][0].Output);
             }
         }
     }
