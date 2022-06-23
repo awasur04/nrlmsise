@@ -33,8 +33,8 @@ namespace nrlmsise
             InitializeComponent();
             statusLabel.Text = "Initializing";
 
-            DefaultUISettings();
             CreateUiArrays();
+            DefaultUISettings();
             statusLabel.Text = "Ready";
         }
         #endregion
@@ -98,6 +98,7 @@ namespace nrlmsise
             //Set Deafult Directory
             directoryTextbox.Text = Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
             outputPath = directoryTextbox.Text;
+            EnablallFlagButton_Click(null, null);
 
         }
         private void Submit(int method)
