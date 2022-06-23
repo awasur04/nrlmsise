@@ -174,7 +174,7 @@ namespace nrlmsise
 
         #region Utilities
 
-        public string GetProperUnits(int index)
+        public string GetProperYAxisUnits(int index)
         {
             if (index == 5)
             {
