@@ -135,6 +135,8 @@ namespace nrlmsise
             chartArea.AxisY.LabelStyle.Format = "{0:#.#####E+0}";
             chart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Chart_MouseClick);
 
+            chartArea.AxisX.Title = profileOptions[profileIndex].method.ToString() + " (" + GetProperXAxisUnits(profileOptions[profileIndex].method) + ")";
+            chartArea.AxisY.Title = "Logarithmic Base 10 Representation\n" + GetProperYAxisUnits(outputIndex);
 
             Series series1 = new Series
             {
@@ -145,22 +147,28 @@ namespace nrlmsise
                 IsValueShownAsLabel = true,
                 MarkerStyle = MarkerStyle.Diamond
             };
+
             series1.SmartLabelStyle.AllowOutsidePlotArea = LabelOutsidePlotAreaStyle.Partial;
             series1.SmartLabelStyle.IsMarkerOverlappingAllowed = false;
             series1.SmartLabelStyle.MovingDirection = LabelAlignmentStyles.Top;
             series1.SmartLabelStyle.MinMovingDistance = 10.0;
             series1.LabelFormat = "{0:#.#####E+0}";
 
+
             for (int i = 0; i < testData[profileIndex].Length; i++)
             {
                 int stepValue = (int)profileOptions[profileIndex].startValue + (int)(profileOptions[profileIndex].stepValue * i);
+
+                double yValue = 0.0;
                 if (outputIndex < 9)
                 {
-                    series1.Points.AddXY(stepValue, testData[profileIndex][i].Output.Densities[outputIndex]);
+                    yValue = GetPointInLogForm(testData[profileIndex][i].Output.Densities[outputIndex]);
+                    series1.Points.AddXY(stepValue, yValue);
                 }
                 else
                 {
-                    series1.Points.AddXY(stepValue, testData[profileIndex][i].Output.Temperature[outputIndex - 9]);
+                    yValue = GetPointInLogForm(testData[profileIndex][i].Output.Temperature[outputIndex - 9]);
+                    series1.Points.AddXY(stepValue, yValue);
                 }
             }
 
@@ -210,6 +218,24 @@ namespace nrlmsise
         #endregion
 
         #region Utilities
+        public double GetPointInLogForm(double pointValue)
+        {
+            if (pointValue <= 0.0)
+            {
+                return 0.0;
+            }
+            return Math.Log(pointValue, 10);
+        }
+
+        public double ReverseLogForm(double pointValue)
+        {
+            if (pointValue == 0.0)
+            {
+                return 0.0;
+            }
+
+            return Math.Pow(10, pointValue);
+        }
 
         public string GetProperYAxisUnits(int index)
         {
