@@ -16,9 +16,6 @@ namespace nrlmsise
 {
     internal partial class GraphResults : Form
     {
-        //When running multiple tests only first graph has correct data
-        //Maybe make ui bigger for easier reading of graph data
-        //Figure out a way to handle one extreme value when rest are normal
 
         Input initialInput;
         Test[][] testData;
