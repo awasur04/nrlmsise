@@ -39,7 +39,43 @@ namespace nrlmsise
         #endregion
 
         #region Event Handlers
+        private void Chart_MouseClick(object sender, MouseEventArgs e)
+        {
+            Chart selectedChart = (Chart)sender;
 
+            HitTestResult hitResult = selectedChart.HitTest(e.X, e.Y);
+
+            if ( hitResult != null && hitResult.PointIndex >= 0)
+            {
+                //CHart -> IndividualTab -> IndividualTabControl -> ProfileTabPage
+                TabPage profileTabPage = (TabPage)selectedChart.Parent.Parent.Parent;
+
+                if (profileTabPage != null)
+                {
+                    for (int i = 0; i < profileTabPage.Controls.Count; i++)
+                    {
+                        if (profileTabPage.Controls[i].Name == "selectionGroupBox")
+                        {
+                            GroupBox selectedTexGroupBox = (GroupBox)profileTabPage.Controls[i];
+                            for (int j = 0; j < selectedTexGroupBox.Controls.Count; j++)
+                            {
+                                switch (selectedTexGroupBox.Controls[j].Name)
+                                {
+                                    case "xLabel":
+                                        selectedTexGroupBox.Controls[j].Text = "X: " + hitResult.Series.Points[hitResult.PointIndex].XValue + GetXUnitsFromParent(profileTabPage.Text);
+                                        break;
+
+                                    case "yLabel":
+                                        selectedTexGroupBox.Controls[j].Text = "Y: " + ReverseLogForm(hitResult.Series.Points[hitResult.PointIndex].YValues[0]) + GetYUnitsFromParent(selectedChart.Parent.Text); ;
+                                        break;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         #endregion
 
         #region Creation Methods
@@ -97,6 +133,7 @@ namespace nrlmsise
             chartArea.AxisX.Title = "Profile Step Value";
             chartArea.AxisY.Title = GetProperUnits(outputIndex);
             chartArea.AxisY.LabelStyle.Format = "{0:#.#####E+0}";
+            chart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Chart_MouseClick);
 
 
             Series series1 = new Series
