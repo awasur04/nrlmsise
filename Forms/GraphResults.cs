@@ -22,7 +22,7 @@ namespace nrlmsise
         Test[][] testData;
         ProfileOption[] profileOptions;
 
-        string[] outputVariables = new string[] { "HELIUM (HE)", "OXYGEN (O)", "DINITROGEN (N2)", "DIOXYGEN (O2)", "ARGON (AR)", "TOTAL MASS DENSITY (GM/CM3)", "HYDROGEN (H)", "NITROGEN (N)", "ANON. O. DENSITY", "EXOSPHERIC TEMP.", "TEMP. AT ALT." };
+        string[] outputVariables = new string[] { "HELIUM (HE)", "ATOMIC OXYGEN (O)", "NITROGEN (N2)", "OXYGEN (O2)", "ARGON (AR)", "TOTAL MASS DENSITY (GM/CM3)", "HYDROGEN (H)", "NITROGEN (N)", "ANON. O. DENSITY", "EXOSPHERIC TEMP.", "TEMP. AT ALT." };
         #endregion
 
         #region Constructor
