@@ -90,12 +90,14 @@ namespace nrlmsise
             for (int i = 0; i < profileOptions.Length; i++)
             {
                 TabPage tp = new TabPage(profileOptions[i].method.ToString() + "TabPage");
+
                 tp.Controls.Add(CreateProfileGroupBox(profileOptions[i]));
                 tp.Controls.Add(CreateSelectionBox());
                 tp.Controls.Add(CreateProfileTabControls(profileOptions[i], i));
+
                 tp.Text = profileOptions[i].method.ToString();
                 tp.Location = new System.Drawing.Point(4, 22);
-                tp.Size = new System.Drawing.Size(863, 558);
+                tp.Size = new System.Drawing.Size(1175, 558);
                 tp.UseVisualStyleBackColor = true;
 
                 tabControl1.TabPages.Add(tp);
@@ -107,13 +109,13 @@ namespace nrlmsise
             TabControl profileTabControl = new TabControl();
             profileTabControl.Location = new System.Drawing.Point(7, 74);
             profileTabControl.SelectedIndex = 0;
-            profileTabControl.Size = new System.Drawing.Size(852, 478);
+            profileTabControl.Size = new System.Drawing.Size(1161, 478);
 
             for (int i = 0; i < outputVariables.Length; i++)
             {
                 TabPage profileStepPage = new TabPage(outputVariables[i]);
                 profileStepPage.Location = new System.Drawing.Point(7, 74);
-                profileStepPage.Size = new System.Drawing.Size(852, 478);
+                profileStepPage.Size = new System.Drawing.Size(1153, 452);
 
                 //Each step page needs a chart
                 profileStepPage.Controls.Add(CreateProfileChart(i, profileIndex));
@@ -130,8 +132,7 @@ namespace nrlmsise
             ChartArea chartArea = new ChartArea();
 
             chart.Location = new System.Drawing.Point(3, 6);
-            chart.Size = new System.Drawing.Size(835, 440);
-
+            chart.Size = new System.Drawing.Size(1144, 440);
             chart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Chart_MouseClick);
 
             chartArea.AxisX.Title = profileOptions[profileIndex].method.ToString() + " (" + GetProperXAxisUnits(profileOptions[profileIndex].method) + ")";
