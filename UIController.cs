@@ -55,7 +55,7 @@ namespace nrlmsise
             {
                 double inputLong = Convert.ToDouble(longitude);
 
-                double currentHours = hours + ((-1) * inputLong / 15);
+                double currentHours = hours + (inputLong / 15);
 
                 if (currentHours < 0.0)
                 {
@@ -78,7 +78,7 @@ namespace nrlmsise
             {
                 double inputLong = Convert.ToDouble(longitude);
 
-                double currentHours = hours + (inputLong / 15);
+                double currentHours = hours - (inputLong / 15);
 
                 if (currentHours < 0.0)
                 {
