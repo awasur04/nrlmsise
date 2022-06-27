@@ -14,9 +14,17 @@ using Newtonsoft.Json;
 
 namespace nrlmsise
 {
+    /*
+     * Name: GraphResults
+     * Extends: Form
+     * Purpose: Graph calculation output data onto a seperate form(UI).
+     * Properties: (Input) initialInput = Base input parameters before any altercations for profile options
+     *             (Test[][]) testData = All input, output, and profile data used in the calculations (Test[Profiles_Enabled_Count][Test_Per_Profile_Count])
+     *             (ProfileOption[]) profileOptions = All selected profile options and their data (start, stop, step, and method)
+     *             (string[]) outputVariables = Labels used for creating individual tabs for each calculation element.
+     */
     internal partial class GraphResults : Form
     {
-
         #region Global Properties
         Input initialInput;
         Test[][] testData;
@@ -26,6 +34,13 @@ namespace nrlmsise
         #endregion
 
         #region Constructor
+        /*
+        * Name: GraphResults
+        * Purpose: Create a new GraphResults form and initialize all data required.
+        * Input: (Input) initialInput = Base input parameters before any altercations for profile options
+        *        (Test[][]) testData = All input, output, and profile data used in the calculations (Test[Profiles_Enabled_Count][Test_Per_Profile_Count])
+        *        (ProfileOption[]) profileOptions = All selected profile options and their data (start, stop, step, and method)
+        */
         public GraphResults(Input initialInput, Test[][] testData, ProfileOption[] profileOptions)
         {
             this.initialInput = initialInput;
@@ -39,6 +54,13 @@ namespace nrlmsise
         #endregion
 
         #region Event Handlers
+        /*
+        * Name: Chart_MouseClick
+        * Purpose: Update closest point when a user clicks on the graph.
+        * Event: Mouse click on all charts.
+        * Input: (object) sender = The UI componenet which triggered the event call
+        *        (MouseEventArgs) e = Provides data on the current mouse actions and location.
+        */
         private void Chart_MouseClick(object sender, MouseEventArgs e)
         {
             Chart selectedChart = (Chart)sender;
@@ -79,12 +101,20 @@ namespace nrlmsise
         #endregion
 
         #region Creation Methods
+        /*
+        * Name: DisplayInputParameters
+        * Purpose: Fill the inputParametersLabel with initialInput defined in global properties.
+        */
         public void DisplayInputParameters()
         {
             string inputData = JsonConvert.SerializeObject(this.initialInput, Formatting.Indented);
             inputParametersLabel.Text = inputData;
         }
 
+        /*
+        * Name: CreateProfileTabs
+        * Purpose: For each profile option selected create a new TabPage and add it to our main TabControl
+        */
         public void CreateProfileTabs()
         {
             for (int i = 0; i < profileOptions.Length; i++)
@@ -104,6 +134,13 @@ namespace nrlmsise
             }
         }
 
+        /*
+        * Name: CreateProfileTabControls
+        * Purpose: Inside of each profile tab create a new tabcontrol, then create a tab page for element in ouputVariables (11)
+        * Input: (ProfileOption) profileOption = the current profile option which is being used to create a new TabControl
+        *        (int) profileIndex = Current index of the selected profile option in global profileOptions. (Not used in this method, but important to pass to CreateProfileChart() for retrieving the correct output)
+        * Return: (TabControl) Complete tabcontrol for the passed profile option with charts and seperate tabs for each element.
+        */
         public TabControl CreateProfileTabControls(ProfileOption profileOption, int profileIndex)
         {
             TabControl profileTabControl = new TabControl();
@@ -126,6 +163,13 @@ namespace nrlmsise
             return profileTabControl;
         }
 
+        /*
+        * Name: CreateProfileChart
+        * Purpose: Create a chart for the given output data and plot each point.
+        * Input: (int) outputIndex = Current index which corresponds with outputVariables for retrieving correct data from output.
+        *        (int) profileIndex = Current index of the selected profile option in global profileOptions.
+        * Return: (Chart) Chart for current output variable including all points plotted available in the output.
+        */
         public Chart CreateProfileChart(int outputIndex, int profileIndex)
         {
             Chart chart = new Chart();
@@ -184,6 +228,12 @@ namespace nrlmsise
             return chart;
         }
 
+        /*
+        * Name: CreateProfileGroupBox
+        * Purpose: Creates a groupbox with labels to display the profile options selected and being displayed in charts.
+        * Input: (ProfileOption) profileOption = Information about the ProfileOption to display inside the groupbox (start, stop, step)
+        * Return: (GroupBox) Box containing 3 labels to display start, stop, and step values
+        */
         public GroupBox CreateProfileGroupBox(ProfileOption profileOption)
         {
             GroupBox groupBox = new GroupBox();
@@ -212,6 +262,11 @@ namespace nrlmsise
             return groupBox;
         }
 
+        /*
+        * Name: CreateSelectionBox
+        * Purpose: Creates a groupbox with labels to display the closest point to mouse click event
+        * Return: (GroupBox) Box containing 2 labels to display x, and y values of closest point
+        */
         public GroupBox CreateSelectionBox()
         {
             GroupBox groupBox = new GroupBox();
@@ -235,6 +290,12 @@ namespace nrlmsise
             return groupBox;
         }
 
+        /*
+        * Name: CreateProfileLabel
+        * Purpose: Creates default label with the same properties for both CreateProfileGroupBox, and CreateSelectionBox
+        * Input: (string) text = Text to display on the new label
+        * Return: (Label) Label with desired size and input text
+        */
         public Label CreateProfileLabel(string text)
         {
             Label label = new Label();
@@ -246,6 +307,13 @@ namespace nrlmsise
         #endregion
 
         #region Utilities
+        /*
+        * Name: GetPointInLogForm
+        * Purpose: Return the log base 10 representation of the input pointValue
+        * Input: (double) pointValue = Current point value to apply log base 10
+        * Return: (double) value of the point with log base 10 scale applied
+        * Comments: Invalid point values will return 0.0
+        */
         public double GetPointInLogForm(double pointValue)
         {
             if (pointValue <= 0.0)
@@ -255,6 +323,13 @@ namespace nrlmsise
             return Math.Log(pointValue, 10);
         }
 
+        /*
+        * Name: ReverseLogForm
+        * Purpose: Return the normal value from a log base 10 representation
+        * Input: (double) pointValue = Current point value which has already been reduced using log function
+        * Return: (double) value of the point with log base 10 removed
+        * Comments: Invalid point values will return 0.0
+        */
         public double ReverseLogForm(double pointValue)
         {
             if (pointValue == 0.0)
@@ -265,6 +340,12 @@ namespace nrlmsise
             return Math.Pow(10, pointValue);
         }
 
+        /*
+        * Name: GetProperYAxisUnits
+        * Purpose: Return the correct units from given output variables index
+        * Input: (int) index = Index of the current element in outputVariables
+        * Return: (string) correct units for the selected element
+        */
         public string GetProperYAxisUnits(int index)
         {
             if (index == 5)
@@ -280,6 +361,12 @@ namespace nrlmsise
             return "DENSITY (CM3)";
         }
 
+        /*
+        * Name: GetProperXAxisUnits
+        * Purpose: Get correct units for the given profile method
+        * Input: (ProfileMethod) profileMethod = method used for determining the desired units
+        * Return: (string) correct units for the selected profile method
+        */
         public string GetProperXAxisUnits(ProfileMethod profileMethod)
         {
             switch(profileMethod)
@@ -306,6 +393,12 @@ namespace nrlmsise
             }
         }
 
+        /*
+        * Name: GetXUnitsFromParent
+        * Purpose: Get correct units based on the TabPage text
+        * Input: (string) parentText = text property of the controls parent TabPage.
+        * Return: (string) correct units for the input text
+        */
         public string GetXUnitsFromParent(string parentText)
         {
             switch(parentText)
@@ -332,6 +425,12 @@ namespace nrlmsise
             }
         }
 
+        /*
+        * Name: GetYUnitsFromParent
+        * Purpose: Get correct units based on the TabPage text
+        * Input: (string) parentText = text property of the controls parent TabPage.
+        * Return: (string) correct units for the input text
+        */
         public string GetYUnitsFromParent(string parentText)
         {
             int index = Array.IndexOf(outputVariables, parentText);

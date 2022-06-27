@@ -236,9 +236,9 @@
             this.lastRadioButton.AutoSize = true;
             this.lastRadioButton.Location = new System.Drawing.Point(7, 32);
             this.lastRadioButton.Name = "lastRadioButton";
-            this.lastRadioButton.Size = new System.Drawing.Size(52, 17);
+            this.lastRadioButton.Size = new System.Drawing.Size(45, 17);
             this.lastRadioButton.TabIndex = 1;
-            this.lastRadioButton.Text = "LAST";
+            this.lastRadioButton.Text = "LST";
             this.lastRadioButton.UseVisualStyleBackColor = true;
             // 
             // utcRadioButton

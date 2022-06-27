@@ -13,6 +13,17 @@ using nrlmsise.Exceptions;
 
 namespace nrlmsise
 {
+    /*
+     * Name: Form1
+     * Extends: Form
+     * Purpose: Main UI and utility/event methods
+     * Properties: (CheckBox[]) flagBoxes = All CheckBoxs which are included in the Model Flags section of the UI
+     *             (TextBox[]) inputParams = All input TextBoxs which are included in the Input Parameters section of the UI.
+     *             (string) outputPath = Current selected output path for json export (Default: Desktop)
+     *             (ProfileOption[]) enabledProfileOption = All profile options which have been enabled in the UI
+     *             (UIController) uiController = UIController class used in communicating with other classes in the program
+     *             (Validate) validate = Class used to validate input data before passing it to the UIController
+     */
     public partial class Form1 : Form
     {
         #region Properties
@@ -26,6 +37,10 @@ namespace nrlmsise
         #endregion
 
         #region Constructor
+        /*
+        * Name: Form1
+        * Purpose: Define instances of uiCOntroller, and setup ui elements
+        */
         public Form1()
         {
             this.uiController = new UIController();
@@ -40,6 +55,13 @@ namespace nrlmsise
         #endregion
 
         #region Button Event Handlers
+        /*
+        * Name: EnablallFlagButton_Click
+        * Purpose: Enable all flag CheckBoxs inside the Model Flags group
+        * Event: Button click on enablallFlagButton
+        * Input: (object) sender = The UI componenet which triggered the event call
+        *        (EventArgs) e = Provides information on the current event data.
+        */
         private void EnablallFlagButton_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < flagBoxes.Length; i++)
@@ -49,6 +71,13 @@ namespace nrlmsise
             dailyApFlagTextbox.Text = "1";
         }
 
+        /*
+        * Name: DisableallFlagButton_Click
+        * Purpose: Disable all flag CheckBoxs inside the Model Flags group
+        * Event: Button click on disableallFlagButton
+        * Input: (object) sender = The UI componenet which triggered the event call
+        *        (EventArgs) e = Provides information on the current event data.
+        */
         private void DisableallFlagButton_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < flagBoxes.Length; i++)
@@ -58,6 +87,13 @@ namespace nrlmsise
             dailyApFlagTextbox.Text = "0";
         }
 
+        /*
+        * Name: ResetFormButton_Click
+        * Purpose: Clear all controls and data within the form
+        * Event: Button click on resetFormButton
+        * Input: (object) sender = The UI componenet which triggered the event call
+        *        (EventArgs) e = Provides information on the current event data.
+        */
         private void ResetFormButton_Click(object sender, EventArgs e)
         {
             ResetForm(inputBox);
@@ -68,6 +104,13 @@ namespace nrlmsise
             statusLabel.Text = "Ready";
         }
 
+        /*
+        * Name: directoryButton_Click
+        * Purpose: Open the folderBrowserDialog to select another output path, validates selected path before updating outputPath.
+        * Event: Button click on directoryButton
+        * Input: (object) sender = The UI componenet which triggered the event call
+        *        (EventArgs) e = Provides information on the current event data.
+        */
         private void directoryButton_Click(object sender, EventArgs e)
         {
             DialogResult result = folderBrowserDialog1.ShowDialog();
@@ -79,11 +122,25 @@ namespace nrlmsise
             }
         }
 
+        /*
+        * Name: GengraphButton_Click
+        * Purpose: Once all input is validated pass data to GraphResults and display the results form.
+        * Event: Button click on gengraphButton
+        * Input: (object) sender = The UI componenet which triggered the event call
+        *        (EventArgs) e = Provides information on the current event data.
+        */
         private void GengraphButton_Click(object sender, EventArgs e)
         {
             Submit(1);
         }
 
+        /*
+        * Name: ExpjsonButton_Click
+        * Purpose: Once all input is validated pass data JSONOutput to and create a new file.
+        * Event: Button click on expjsonButton
+        * Input: (object) sender = The UI componenet which triggered the event call
+        *        (EventArgs) e = Provides information on the current event data.
+        */
         private void ExpjsonButton_Click(object sender, EventArgs e)
         {
             //Calculations.TestGTD7();
@@ -92,15 +149,23 @@ namespace nrlmsise
         #endregion
 
         #region Utilities
-
+        /*
+        * Name: DefaultUISettings
+        * Purpose: Setup UI with desired values (Define default output path, and enable all flag checkboxs)
+        */
         private void DefaultUISettings()
         {
             //Set Deafult Directory
             directoryTextbox.Text = Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
             outputPath = directoryTextbox.Text;
             EnablallFlagButton_Click(null, null);
-
         }
+
+        /*
+        * Name: Submit
+        * Purpose: Validate all input data then pass it to the UIController and call the corresponding output method.
+        * Input: (int) method: Current selected method for submitting the data (0 = Export to JSON // 1 = Graph)
+        */ 
         private void Submit(int method)
         {
             // 0: JSON
@@ -138,6 +203,10 @@ namespace nrlmsise
             }
         }
 
+        /*
+        * Name: CreateUiArrays
+        * Purpose: Populate inputParams, and flagBoxes array with all corresponding UI Controls
+        */
         private void CreateUiArrays()
         {
             inputParams = new TextBox[] { hodTextbox, latTextbox, longTextbox, altTextbox, f107Textbox, f107aTextbox, apTextbox };
@@ -146,6 +215,11 @@ namespace nrlmsise
                 diffequFlagBox, teriFlagBox, utlongFlagBox, semidiFlagBox, diurnalFlagBox, asymannFlagBox, asymsemiFlagBox, symannFlagBox, symsemiFlagBox, timeFlagBox, f107FlagBox};
         }
 
+        /*
+        * Name: ValidateInput
+        * Purpose: Validate all input and profile data given by user.
+        * Return: (bool) Value represents input validity (true = input is valid // false = input invalid)
+        */
         private bool ValidateInput()
         {
             if (ValidateInputParameters())
@@ -161,6 +235,11 @@ namespace nrlmsise
             return false;
         }
 
+        /*
+        * Name: ValidateInputParameters
+        * Purpose: Validate input parameters with corresponding validate method, if errors are present change textBox color to red and display a message to the user
+        * Return: (bool) Value represents input validity (true = input is valid // false = input invalid)
+        */
         private bool ValidateInputParameters()
         {
             bool[] errorIndex = new bool[7];
@@ -217,6 +296,12 @@ namespace nrlmsise
             return true;
         }
 
+        /*
+        * Name: ValidateProfileOptions
+        * Purpose: Validate enabled profile options with corresponding validate method, if errors are present change textBox color to red and display a message to the user
+        * Input: (ProfileOption[]) enabledOptions = All profile options which have been enabled and the data contained within them. (start, stop, step, method)
+        * Return: (bool) Value represents profile options validity (true = input is valid // false = input invalid)
+        */
         private bool ValidateProfileOptions(ProfileOption[] enabledOptions)
         {
             bool[][] errorIndex = new bool[tabControl1.TabCount][];
@@ -269,6 +354,11 @@ namespace nrlmsise
             return true;
         }
 
+        /*
+        * Name: GetActiveProfileOptions
+        * Purpose: Get all enabled profile options from the UI, create a new ProfileOption for each option enabled
+        * Return: (ProfileOption[]) Array containing all enabled profile options and their data
+        */
         private ProfileOption[] GetActiveProfileOptions()
         {
             ProfileOption[] possibleProfileOptions = new ProfileOption[7];
@@ -301,6 +391,11 @@ namespace nrlmsise
             return possibleProfileOptions.Where(profile => profile != null).ToArray();
         }
 
+        /*
+        * Name: IsPageEnabled
+        * Purpose: Determines if the profile option enabledCheckBox is current selected
+        * Return: (bool) Current status of the checkbox (true = enabled // false = disabled)
+        */
         private bool IsPageEnabled(TabPage tabPage)
         {
             foreach (Control c in tabPage.Controls)
@@ -313,6 +408,12 @@ namespace nrlmsise
             return false;
         }
 
+        /*
+        * Name: GetProfileValues
+        * Purpose: If the profile option is enabled, then gather the start, stop, and step values from the corresponding text boxes
+        * Input: (TabPage) Selected tabPage to gather data from
+        * Return: (double[]) Data retrieved from the input TabPage [start, stop, step]
+        */
         private double[] GetProfileValues(TabPage tabPage)
         {
             double[] values = new double[3];
@@ -350,6 +451,11 @@ namespace nrlmsise
             return values;
         }
 
+        /*
+        * Name: GetInputFlags
+        * Purpose: Determine all enabled flags from Model Flags group and set the flag switch value to the corresponding bool value
+        * Return: (Flags) Flags model with the correct switch values
+        */
         private Flags GetInputFlags()
         {
             Flags selectedFlags = new Flags();
@@ -392,6 +498,12 @@ namespace nrlmsise
             
         }
 
+        /*
+        * Name: ToggleError
+        * Purpose: Set the textbox color to red, or black for the input textbox
+        * Input: (TextBox) tb = Current TextBox to change the color of.
+        *        (bool) errorPresent = Whether an error is present or not (true = error present // false = no error present)
+        */
         private void ToggleError(TextBox tb, bool errorPresent)
         {
             if (errorPresent)
@@ -404,6 +516,11 @@ namespace nrlmsise
             }
         }
 
+        /*
+        * Name: ResetForm
+        * Purpose: Reset all controls in the given container to be unselected and blank
+        * Input: (Control) container = Container to iterate for all of the controls and reset their values
+        */
         private void ResetForm(Control container)
         {
             foreach (Control control in container.Controls)
@@ -422,6 +539,11 @@ namespace nrlmsise
             enabledProfileOption = null;
         }
 
+        /*
+        * Name: ResetControl
+        * Purpose: Reset the given control based on its type
+        * Input: (Control) control = Current control to reset
+        */
         public void ResetControl(Control control)
         {
             switch (control)

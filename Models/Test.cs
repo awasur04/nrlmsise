@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace nrlmsise.Models
 {
+    /* 
+     * Name: Test
+     * Purpose: Model to represent data used and calculated for each test performed
+     * Properties: (Input) input = Model to store the input parameters
+     *             (Output) output = Model to store calculated output results
+     *             (Flags) flags = FLags used in calculations
+     */
     internal class Test
     {
         #region Properties

@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace nrlmsise
 {
+    /*
+     * Name: AP
+     * Purpose: To model AP array if defined by user
+     * Properties: (double[]) ap_array = the array of AP values defined by user
+     */
     internal class AP
     {
         double[] ap_array;
 
-        /* Array containing the following magnetic values:
+        /* 
+         * Array containing the following magnetic values:
         *   0 : daily AP
         *   1 : 3 hr AP index for current time
         *   2 : 3 hr AP index for 3 hrs before current time

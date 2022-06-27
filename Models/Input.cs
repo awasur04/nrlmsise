@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace nrlmsise
 {
+    /* 
+     * Name: Input
+     * Implements: ICloneable
+     * Purpose: Model to represent input parameters used in one calculation.
+     */
     internal class Input : ICloneable
     {
         #region Properties

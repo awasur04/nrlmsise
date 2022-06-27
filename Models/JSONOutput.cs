@@ -7,6 +7,13 @@ using Newtonsoft.Json;
 
 namespace nrlmsise.Models
 {
+    /* 
+     * Name: JSONOutput
+     * Purpose: Model to represent readable JSON format for all test outputs as well as the input parameters used in calculations.
+     * Input Parameters: (ProfileOption[]) profileOptions = All the profile options used for the current calculations
+     *                   (Test[][]) testData = All test data used for calclations (Inludes Input, Output, and Flags)
+     *                   (Input) defaultInputParameters = Parameters entered by the user before calculations.
+     */
     internal class JSONOutput
     {
         public Input inputParameters;
@@ -36,6 +43,12 @@ namespace nrlmsise.Models
         }
     }
 
+    /* 
+     * Name: JSONOutputProfile
+     * Purpose: Model to represent readable JSON format for only tests performed by the specified profile option
+     * Input Parameters: (ProfileOption) profile = Current profile options used in the given set of data
+     *                   (Test[]) currentTest = Test data used and calculated for the specified profile
+     */
     internal class JSONOutputProfile
     {
         public string ProfileOptions;
@@ -59,6 +72,11 @@ namespace nrlmsise.Models
         }
     }
 
+    /* 
+     * Name: JSONTestOuput
+     * Purpose: Model to represent readable JSON format for the specified Test object
+     * Input Parameters: (Output) testOutput = Output calculated for the current Test object
+     */
     internal class JSONTestOutput
     {
         //Add scientifc display
@@ -82,6 +100,12 @@ namespace nrlmsise.Models
             };
         }
 
+        /* 
+        * Name: ConvertToScientific
+        * Purpose: Method to convert given double values into scientifc notation (1000 -> 1.0E+3)
+        * Input Parameters: (double) value = Value to convert into scientific notation
+        * Return: (string) - scientific representation of the given value
+        */
         public string ConvertToScientific(double value)
         {
             if (Double.IsNaN(value) || Double.IsInfinity(value))

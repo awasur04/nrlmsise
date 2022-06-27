@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace nrlmsise
 {
+
+    /* 
+     * Name: Data
+     * Purpose: Stores atmospheric constants used for calculations (All defined in Calculations.cs)
+     */
     internal static class Data
     {
         public static void SetData()

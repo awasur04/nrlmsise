@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace nrlmsise
 {
  /*   
- *   Switches: to turn on and off particular variations use these switches.
+ *   Flags: to turn on and off particular variations use these switches.
  *   0 is off, 1 is on, and 2 is main effects off but cross terms on.
  *
  *   Standard values are 0 for switch 0 and 1 for switches 1 to 23. The 
@@ -80,7 +80,11 @@ namespace nrlmsise
         #endregion
 
         #region Methods
-        public void computeFlags()
+        /*
+         * Name: ComputeFlags()
+         * Purpose: Set the SWC and SW array with valid switch values used for calculations
+         */
+        public void ComputeFlags()
         {
             for (int i = 0; i < switches.Length; i++)
             {

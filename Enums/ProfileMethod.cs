@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace nrlmsise.Enums
 {
+    /*
+     * Name: ProfileMethod
+     * Purpose: Represent the different profile options available for calculation
+     */
     public enum ProfileMethod
     {
         ALTITUDE,

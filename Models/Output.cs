@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace nrlmsise
 {
+    /* 
+     * Name: Output
+     * Purpose: Model to represent output data, saves temperature and density values for one calculation.
+     * Properties: (double[]) densities = Array which stores the calculated densities
+     *             (double[]) temperature = Array which stores the calculated temperatures
+     */
     internal class Output
     {
         #region Properties

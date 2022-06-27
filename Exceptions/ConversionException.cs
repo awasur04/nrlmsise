@@ -7,6 +7,12 @@ using System.Windows.Forms;
 
 namespace nrlmsise.Exceptions
 {
+    /* 
+     * Name: Conversion Exception
+     * Purpose: Exception thrown when input profile parameters are invalid and cannot be parsed into the correct type
+     * Properties: (TextBox) callingElement = The calling textbox which threw the error
+     * Input: (TextBox) callingElement = The calling textbox which threw the error
+     */
     internal class ConversionException : Exception
     {
         public TextBox callingElement;

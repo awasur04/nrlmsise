@@ -7,6 +7,14 @@ using nrlmsise.Enums;
 
 namespace nrlmsise
 {
+    /*
+     * Name: ProfileOption
+     * Purpose: To model our profile options enabled by the calculator
+     * Properties: ProfileMethod method = ProfileMethod enum to represent the method this class will model
+     *             double startValue = The start value defined for the current profile method
+     *             double stopValue = Stopping value defined for the current profile method
+     *             double stepValue = The amount our parameter will increase after each calculation
+     */
     internal class ProfileOption
     {
         #region Properties
